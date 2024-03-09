@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
@@ -11,14 +11,12 @@ const firebaseConfig = {
     appId: "1:568563772621:web:d560f3d072ae70a9294d84",
 };
 
+//Initilized variables
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 
-const login = async () => {
-    const provider = new GoogleAuthProvider();
-    const user = (await signInWithPopup(auth, provider)).user;
-    return user;
-};
+//collections
+const userCollection = collection(db, "users");
 
-export { app, db, auth, login };
+export { app, db, auth, userCollection };
