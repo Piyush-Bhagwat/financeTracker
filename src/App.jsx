@@ -1,11 +1,15 @@
 import './App.css';
-import { checkUserExist, login } from './database/auth.db';
+
+import Dashboard from './components/dashboard/Dashboard';
+
 
 function App() {
   return (
     <div className="App">
       <h1>Tracker</h1>
-      <button onClick={login}>Hello</button>
+
+      <Dashboard></Dashboard>
+
     </div>
   );
 }
