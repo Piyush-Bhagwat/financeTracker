@@ -2,7 +2,7 @@ import React from 'react'
 
 const Charts = () => {
   return (
-    <div>Charts</div>
+    <div className='h-screen'>Charts</div>
   )
 }
 

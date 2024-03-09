@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Charts from './pages/Charts';
 import Transactions from './pages/Transactions';
+import AddTransaction from './pages/AddTransaction';
+import Wallet from './pages/Wallet';
 import Error from './pages/Error';
 
 const router = createBrowserRouter([
@@ -20,7 +22,9 @@ const router = createBrowserRouter([
       { index: true, element: <Home />},
       { path: "login", element: <Login /> },
       { path: "transactions", element: <Transactions /> },
+      { path: "add-transaction", element: <AddTransaction /> },
       { path: "charts", element: <Charts /> },
+      { path: "wallet", element: <Wallet /> },
     ]
 
   },

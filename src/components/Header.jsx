@@ -2,7 +2,14 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <header className='flex content-between justify-between border-2 max-w-sm'>
+        <div>
+            logo
+        </div>
+        <div>
+            profile
+        </div>
+    </header>
   )
 }
 
