@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useGlobalContext } from '../../context/Context';
 import { Chart } from 'chart.js/auto';
-import './dashboard.css'
+import '../../assets/style/dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChartComponent from '../chart/Chart';
 import { Progress } from 'antd'
