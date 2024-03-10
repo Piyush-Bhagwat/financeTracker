@@ -14,9 +14,9 @@ function App() {
         <div >
             <Header />
             <Outlet />
-            <Bottombar />
+            <BottomBar />
 
-            <Dashboard></Dashboard>
+            <Dashboard />
 
         </div>
     );
