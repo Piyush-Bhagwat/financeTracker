@@ -4,7 +4,6 @@ import { Chart } from 'chart.js/auto';
 import './dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChartComponent from '../chart/Chart';
-// import Analytics from '../analytics/Analytics';
 import {Progress} from 'antd'
 
 function Dashboard() {
