@@ -2,7 +2,7 @@ import React from 'react'
 
 const Login = () => {
   return (
-    <div className='h-screen' >Login</div>
+    <div >Login</div>
   )
 }
 

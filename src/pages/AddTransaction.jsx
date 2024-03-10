@@ -2,7 +2,7 @@ import React from 'react'
 
 const AddTransaction = () => {
   return (
-    <div className='h-screen'>AddTransaction</div>
+    <div>AddTransaction</div>
   )
 }
 
