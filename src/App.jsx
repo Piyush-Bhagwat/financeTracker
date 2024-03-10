@@ -6,18 +6,16 @@ import Bottombar from "./components/Bottombar";
 // import Dashboard from './components/dashboard/Dashboard';
 
 import Dashboard from "./components/dashboard/Dashboard";
-import { addTransaction, getTransactions } from "./database/transaction.db";
-import { setBalance } from "./database/user.db";
+import { addCategory, getCategories } from "./database/user.db";
 
 function App() {
     return (
-        <div >
+        <div>
             <Header />
             <Outlet />
-            <Bottombar />
+            <BottomBar />
 
-            <Dashboard></Dashboard>
-
+            <Dashboard />
         </div>
     );
 }
