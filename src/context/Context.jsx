@@ -10,8 +10,13 @@ export const ContextProvider = ({ children }) => {
     const [incomes, setIncomes] = useState(defaultIncomes);
     const [expenses, setExpenses] = useState(defaultExpenses);
 
+    const [user, setUser] = useState(null);
+
     const totalIncome = incomes.reduce((total, income) => total + income, 0);
-    const totalExpenses = expenses.reduce((total, expense) => total + expense,0);
+    const totalExpenses = expenses.reduce(
+        (total, expense) => total + expense,
+        0
+    );
     const totalBalance = totalIncome - totalExpenses;
 
     return (

@@ -10,6 +10,8 @@
   border-radius: 20px 20px 0 0;
   display: flex;
   justify-content: space-around;
+
+  z-index: 3;
 }
 
 .nav-icon {
