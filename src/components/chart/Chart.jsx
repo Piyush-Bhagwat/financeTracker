@@ -64,6 +64,7 @@ function Chart() {
       <Line data={data} options={options} />
     </div>
   );
+
 }
 
 export default Chart;

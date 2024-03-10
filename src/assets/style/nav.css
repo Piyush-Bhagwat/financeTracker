@@ -5,7 +5,7 @@
     padding: 5% 0;
     width: 100%;
     justify-content: space-around;
-
+    z-index: 2;
     background-color: var(--secondary);
 }
 

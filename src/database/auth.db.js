@@ -14,6 +14,8 @@ const login = async () => {
     } else {
         console.log("user logged in");
     }
+
+    return user;
 };
 
 const loginWithGoogle = async () => {

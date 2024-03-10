@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useGlobalContext } from '../../context/Context';
 import { Chart } from 'chart.js/auto';
@@ -6,15 +7,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChartComponent from '../chart/Chart';
 import { Progress } from 'antd'
 
+
 function Dashboard() {
-  const chartRef = useRef(null);
-  const { totalIncome, totalExpenses } = useGlobalContext();
+    const chartRef = useRef(null);
+    const { totalIncome, totalExpenses } = useGlobalContext();
 
-  const incomePercentage = (totalIncome / (totalIncome + totalExpenses)) * 100;
-  const expensePercentage = (totalExpenses / (totalIncome + totalExpenses)) * 100;
+    const incomePercentage =
+        (totalIncome / (totalIncome + totalExpenses)) * 100;
+    const expensePercentage =
+        (totalExpenses / (totalIncome + totalExpenses)) * 100;
 
-  useEffect(() => {
-    if (!chartRef.current) return;
+    useEffect(() => {
+        if (!chartRef.current) return;
 
     const myChart = new Chart(chartRef.current, {
       type: 'bar',
@@ -65,26 +69,26 @@ function Dashboard() {
       }
     });
 
-    return () => {
-      myChart.destroy();
-    };
-  }, [chartRef, totalIncome, totalExpenses]);
+        return () => {
+            myChart.destroy();
+        };
+    }, [chartRef, totalIncome, totalExpenses]);
 
-  return (
-    <div className='container'>
-      <h1>All Transactions</h1>
-      <div className="statistics">
-        <div className="chart">
-          <h2>Total Income Vs Total Expenses</h2>
-          <canvas ref={chartRef} ></canvas>
-        </div>
+    return (
+        <div className="container">
+            <h1>All Transactions</h1>
+            <div className="statistics">
+                <div className="chart">
+                    <h2>Total Income Vs Total Expenses</h2>
+                    <canvas ref={chartRef}></canvas>
+                </div>
 
-        <div className="chartLine">
-          <div className="line">
-            <h2>Daily Expenses</h2>
-            <ChartComponent></ChartComponent>
-          </div>
-        </div>
+                <div className="chartLine">
+                    <div className="line">
+                        <h2>Daily Expenses</h2>
+                        <ChartComponent></ChartComponent>
+                    </div>
+                </div>
 
           <h2>Overall Percentage</h2>
         <div className="progress">
@@ -110,7 +114,7 @@ function Dashboard() {
             </p>
           </div>
 
-          {/* <div className="balance">
+                    {/* <div className="balance">
             <h2>Total Balance</h2>
             <p>
               <Progress type='circle' strokeColor={'green'} percent={totalBalance}></Progress>
@@ -118,10 +122,10 @@ function Dashboard() {
               {totalBalance}
             </p>
           </div> */}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Dashboard;
