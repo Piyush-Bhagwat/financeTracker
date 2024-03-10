@@ -1,11 +1,8 @@
-import React from 'react'
-import { ChartJs } from 'chart.js'
-import { Line } from 'react-chartjs-2'
-import './Chart.css'
-import moment from 'moment'
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import { useGlobalContext } from '../../context/Context';
 
 function Chart() {
-
   // const dateFormat = (date) => {
   //   return moment(date).format('DD/MM/YYYY')
   // }
@@ -49,7 +46,7 @@ function Chart() {
       {/* <Line data={data}></Line> */}
       <h1>chart</h1>
     </div>
-  )
+  );
 }
 
-export default Chart
+export default Chart;
