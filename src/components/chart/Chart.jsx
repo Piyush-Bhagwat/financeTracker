@@ -43,7 +43,7 @@ function Chart() {
 
     return (
         <div className="container">
-            <Line data={data}></Line>
+            <Line data={data} ></Line>
             <h1>chart</h1>
         </div>
     );
