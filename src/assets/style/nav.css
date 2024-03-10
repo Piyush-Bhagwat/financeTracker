@@ -13,19 +13,19 @@
     flex-direction: column;
     align-items: center;
     width: 20%;
-    position: relative; /* Ensure relative positioning for absolute child */
+    position: relative; 
 }
 
 .nav-icon {
     font-size: 1.4em;
-    z-index: 30; /* Ensure icons appear above the blob */
+    z-index: 30; 
     transition: 0.3s bottom;
-    position: relative; /* Ensure relative positioning for absolute child */
+    position: relative; 
 }
 
 .nav-active .nav-icon {
-    font-size: 2em; /* Increase font size of the active icon */
-    bottom: 30px; /* Adjust position of the active icon */
+    font-size: 2em; 
+    bottom: 30px;
 }
 
 .nav-blob {
@@ -40,5 +40,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20; /* Ensure blob appears behind icons */
+    z-index: 20; 
 }
