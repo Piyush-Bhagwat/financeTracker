@@ -11,18 +11,13 @@ import { setBalance } from "./database/user.db";
 
 function App() {
     return (
-        <div className="flex flex-col justify-center items-center w-sm">
+        <div >
             <Header />
             <Outlet />
-            <button
-                onClick={() =>
-                    setBalance("jFL5c73O90dglYq40RyBirnztHF3", 21234)
-                }
-            >
-                Hello
-            </button>
-            <BottomBar />
+            <Bottombar />
+
             <Dashboard></Dashboard>
+
         </div>
     );
 }
