@@ -16,7 +16,8 @@ function Chart() {
         fill: false,
         borderColor: 'green',
         backgroundColor:'green',
-        color:'white'
+        color:'white',
+        tension: 0.2, 
       },
       {
         label: 'Expenses',
@@ -24,7 +25,8 @@ function Chart() {
         fill: false,
         borderColor: 'red',
         backgroundColor:'red',
-        color:'white'
+        color:'white',
+        tension: 0.2, 
       },
     ],
   };
