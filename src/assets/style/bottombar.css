@@ -9,6 +9,8 @@
   border-radius: 20px 20px 0 0;
   display: flex;
   justify-content: space-around;
+
+  z-index: 3;
 }
 
 .nav-icon {
@@ -36,6 +38,7 @@
   .bottom-bar {
     width: 100%;
   }
+
   .nav-icon {
     width: 2.5em;
     height: 2.5em;

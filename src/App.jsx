@@ -1,7 +1,7 @@
-import './App.css';
-import { Outlet } from 'react-router-dom';
-import Header from './components/Header';
-import Bottombar from './components/Bottombar';
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import Bottombar from "./components/Bottombar";
 
 // import Dashboard from './components/dashboard/Dashboard';
 
@@ -13,8 +13,8 @@ function App() {
         <div className="flex flex-col justify-center items-center w-sm">
             <Header />
             <Outlet />
-            
-            <Navbar />
+
+            <Bottombar />
             <Dashboard></Dashboard>
         </div>
     );
