@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/style/bottombar.css";
 import { Link } from "react-router-dom";
 
@@ -14,10 +14,33 @@ const Bottombar = () => {
     { route: "transactions", icon: <HiOutlineArrowsRightLeft /> },
     { route: "add-transaction", icon: <IoAddOutline /> },
     { route: "charts", icon: <IoBarChartOutline /> },
-    { route: "wallet", icon: <IoWalletOutline /> }
+    { route: "wallet", icon: <IoWalletOutline /> },
   ];
 
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const currentRoute = window.location.pathname.substring(1);
+    switch (currentRoute) {
+      case "":
+        setActive(0);
+        break;
+      case "transactions":
+        setActive(1);
+        break;
+      case "add-transaction":
+        setActive(2);
+        break;
+      case "charts":
+        setActive(3);
+        break;
+      case "wallet":
+        setActive(4);
+        break;
+      default:
+        return;
+    }
+  }, [window.location.pathname]);
 
   const createMenus = () => {
     return menus.map((menu, i) => (
@@ -31,13 +54,8 @@ const Bottombar = () => {
       </Link>
     ));
   };
-  
 
-  return (
-    <nav className="bottom-bar">
-      {createMenus()}
-    </nav>
-  );
+  return <nav className="bottom-bar">{createMenus()}</nav>;
 };
 
 export default Bottombar;
