@@ -1,31 +1,76 @@
 .bottom-bar {
     position: fixed;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--secondary);
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
-    max-width: 30em;
+    max-width: 100%;
     border-radius: 20px 20px 0 0;
     display: flex;
-    justify-content: space-around; /* Added for better spacing */
-    padding: 0.5em; /* Added padding for better spacing */
-    width: 100%; /* Added to ensure full width on all screen sizes */
+    justify-content: space-around;
 }
 
 .nav-icon {
     font-size: 1.5em;
     padding: 0.5em;
-    margin: 0.5em;
+    margin: 0.2em; /* Reduced margin to fit icons closer */
     margin-top: 0;
     transition: 0.5s ease-in-out;
-    border-radius: 100%;
-    border: 7px solid var(--secondary);
+    border-radius: 50%;
+    border: 5px solid var(--secondary);
 }
 
 .nav-active {
-    transform: scale(1.05) translateY(-1em);
+    transform: scale(1.25) translateY(-1em);
     background: linear-gradient(135deg, #23f, #6589ff);
-    border: 7px solid var(--background);
+    border: 5px solid var(--background);
     color: white;
+}
+
+@media screen and (max-width: 426px) {
+    .bottom-bar{
+       width: 100%; /* Occupy full width */
+    }
+    .bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--secondary);
+        text-align: center;
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .nav-icon {
+        font-size: 1.5em;
+        padding: 0.5em;
+        margin: 0.2em; /* Reduced margin to fit icons closer */
+        margin-top: 0;
+        transition: 0.5s ease-in-out;
+        border-radius: 50%;
+        border: 5px solid var(--secondary);
+    }
+    
+    .nav-active {
+        transform: scale(1.25) translateY(-1em);
+        background: linear-gradient(135deg, #23f, #6589ff);
+        border: 5px solid var(--background);
+        color: white;
+    }
+    
+    @media screen and (max-width: 425px) {
+        .bottom-bar{
+           width: 100%; /* Occupy full width */
+        }
+        .nav-icon {
+            font-size: 1.4em; 
+            padding: 0.4em; 
+            margin: 0.2em;
+        }
+    }
+    
 }
