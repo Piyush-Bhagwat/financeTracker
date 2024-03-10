@@ -1,4 +1,10 @@
-import { collection, doc, setDoc, updateDoc } from "@firebase/firestore";
+import {
+    collection,
+    doc,
+    updateDoc,
+    getDocs,
+    addDoc,
+} from "@firebase/firestore";
 import { db } from "./config.db";
 
 const setBalance = async (uid, balanceAmount) => {
@@ -8,4 +14,24 @@ const setBalance = async (uid, balanceAmount) => {
     console.log("balance updated");
 };
 
-export { setBalance };
+const getCategories = async (uid) => {
+    const colRef = collection(db, `users/${uid}/categories`);
+
+    const snapShot = await getDocs(colRef);
+    const categories = [];
+
+    snapShot.forEach((cat) => {
+        categories.push({ id: cat.id, ...cat.data() });
+    });
+
+    console.log(categories);
+};
+
+const addCategory = async (uid, category) => {
+    const colRef = collection(db, `users/${uid}/categories`);
+
+    await addDoc(colRef, category);
+    console.log("added a category");
+};
+
+export { setBalance, getCategories, addCategory };
