@@ -8,6 +8,7 @@ import BottomBar from "./components/Bottombar";
 import Dashboard from "./components/dashboard/Dashboard";
 import { addTransaction, getTransactions } from "./database/transaction.db";
 import { setBalance } from "./database/user.db";
+import { login } from "./database/auth.db";
 
 function App() {
     return (
