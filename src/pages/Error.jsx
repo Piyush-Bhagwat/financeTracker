@@ -2,7 +2,7 @@ import React from 'react'
 
 const Error = () => {
   return (
-    <div className='h-screen'>Error 404 Not found</div>
+    <div >Error 404 Not found</div>
   )
 }
 
