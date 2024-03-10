@@ -3,34 +3,48 @@ import { Line } from 'react-chartjs-2';
 import { useGlobalContext } from '../../context/Context';
 
 function Chart() {
-  const { incomes, expenses } = useGlobalContext();
+  // const dateFormat = (date) => {
+  //   return moment(date).format('DD/MM/YYYY')
+  // }
 
-  const data = {
-    labels: ['January', 'February', 'March'], 
-    datasets: [
-      {
-        label: 'Income',
-        data: incomes, 
-        fill: false,
-        borderColor: 'green',
-        backgroundColor: 'green', 
-        tension:.2
-      },
-      {
-        label: 'Expenses',
-        data: expenses, 
-        fill: false,
-        borderColor: 'red',
-        backgroundColor: 'red', 
-        tension:.2
-      },
-    ],
-  };
+  // const { incomes, expenses } = context()
+
+  // const data = {
+  //   labels: incomes.map((inc) => {
+  //     const { date } = inc
+  //     return dateFormat(date)
+  //   }),
+
+  //   datasets: [
+  //     {
+  //       label: 'Income',
+  //       data: [
+  //         ...incomes.map((income) => {
+  //           const { amount } = income
+  //           return amount
+  //         })
+  //       ],
+  //       backgroundColor: 'green'
+  //     },
+
+  //     {
+  //       label: 'expenses',
+  //       data: [
+  //         ...expenses.map((expense) => {
+  //           const { amount } = expense
+  //           return amount
+  //         })
+  //       ],
+  //       backgroundColor: 'red'
+  //     }
+
+  //   ]
+  // }
 
   return (
-    <div className='chart'>
-      <h1>Income and Expenses Over Time</h1>
-      <Line data={data} />
+    <div className='container'>
+      {/* <Line data={data}></Line> */}
+      <h1>chart</h1>
     </div>
   );
 }
