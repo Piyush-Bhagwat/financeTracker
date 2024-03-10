@@ -4,7 +4,7 @@ import { Chart } from 'chart.js/auto';
 import './dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChartComponent from '../chart/Chart';
-import {Progress} from 'antd'
+import { Progress } from 'antd'
 
 function Dashboard() {
   const chartRef = useRef(null);
@@ -35,10 +35,31 @@ function Dashboard() {
         }]
       },
       options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white', // Set label color to white
+            },
+          },
+        },
         responsive: true,
         scales: {
+          x: {
+            grid: {
+              color: 'rgba(240, 240, 240, 0.5)', // Lightish white color for x-axis grid lines
+            },
+            ticks: {
+              color: 'rgba(240, 240, 240, 0.8)', // Lightish white color for x-axis labels
+            },
+          },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grid: {
+              color: "rgba(255, 255, 255, 0.2)", // Set the color of the grid lines to white
+            },
+            ticks: {
+              color: 'rgba(240, 240, 240, 0.5)' // Make x-axis labels bold
+            },
           }
         }
       }
@@ -65,20 +86,25 @@ function Dashboard() {
           </div>
         </div>
 
+          <h2>Overall Percentage</h2>
         <div className="progress">
           <div className="circle">
-          <h2>Total Income</h2>
+            <h3>Total Income</h3>
             <p>
-              <Progress type='circle' strokeColor={'green'} percent={incomePercentage}></Progress>
+              <Progress type='circle' strokeColor={'green'} percent={incomePercentage} format={() => (
+                <span style={{ color: 'white' }}>{`${incomePercentage}%`}</span>
+              )}></Progress>
               <FontAwesomeIcon icon="fas fa-rupee-sign" />
               {totalIncome}
             </p>
           </div>
 
-          <div className="expense">
-            <h2>Total Expenses</h2>
+          <div className="circle">
+            <h3>Total Expenses</h3>
             <p>
-              <Progress type='circle' strokeColor={'green'} percent={expensePercentage}></Progress>
+              <Progress type='circle' strokeColor={'green'} percent={expensePercentage} format={() => (
+                <span style={{ color: 'white' }}>{`${incomePercentage}%`}</span>
+              )}></Progress>
               <FontAwesomeIcon icon="fas fa-rupee-sign" />
               {totalExpenses}
             </p>
