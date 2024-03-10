@@ -10,12 +10,11 @@ import { addTransaction, getTransactions } from "./database/transaction.db";
 
 function App() {
     return (
-        <div className="flex flex-col justify-center items-center w-sm">
+        <div >
             <Header />
             <Outlet />
-            
-            <Navbar />
-            <Dashboard></Dashboard>
+            <Bottombar />
+            {/* <Dashboard></Dashboard> */}
         </div>
     );
 }
