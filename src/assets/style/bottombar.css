@@ -20,7 +20,7 @@
   font-size: 1.5em;
   padding: 0.5em;
   margin: 0.2em;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
   border-radius: 50%;
   border: 5px solid var(--secondary);
   display: flex;
@@ -30,7 +30,7 @@
 
 .nav-active {
   transform: scale(1.25) translateY(-1em);
-  background: linear-gradient(135deg, #23f, #6589ff);
+  background: linear-gradient(135deg, var(--primary), #6589ff);
   border: 5px solid var(--background);
   color: white;
 }
@@ -39,6 +39,7 @@
   .bottom-bar {
     width: 100%;
   }
+
   .nav-icon {
     width: 2.5em;
     height: 2.5em;
