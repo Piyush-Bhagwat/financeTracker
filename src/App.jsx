@@ -5,18 +5,19 @@ import Bottombar from './components/Bottombar';
 
 // import Dashboard from './components/dashboard/Dashboard';
 
+import Dashboard from "./components/dashboard/Dashboard";
+import { addTransaction, getTransactions } from "./database/transaction.db";
 
 function App() {
-  return (
-    <div >
-     <Header/>
-     < Outlet/>
-     <Bottombar/>
-     {/* < Navbar/> */}
-      {/* <Dashboard></Dashboard> */}
-
-    </div>
-  );
+    return (
+        <div className="flex flex-col justify-center items-center w-sm">
+            <Header />
+            <Outlet />
+            
+            <Navbar />
+            <Dashboard></Dashboard>
+        </div>
+    );
 }
 
 export default App;
