@@ -1,52 +1,68 @@
-import React from "react";
-import { Line } from "react-chartjs-2";
-import moment from "moment";
-import { useGlobalContext } from "../../context/Context";
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import { useGlobalContext } from '../../context/Context';
 
 function Chart() {
-    const dateFormat = (date) => {
-        return moment(date).format("DD/MM/YYYY");
-    };
+  const { incomes, expenses } = useGlobalContext();
 
-    const { incomes, expenses } = useGlobalContext();
+  // Assuming incomes and expenses are arrays of numbers representing amounts over time
 
-    const data = {
-        labels: incomes.map((inc) => {
-            const { date } = inc;
-            return dateFormat(date);
-        }),
+  const data = {
+    labels: ['January', 'February', 'March'], // Example labels for months
+    datasets: [
+      {
+        label: 'Income',
+        data: incomes, // Array of income amounts
+        fill: false,
+        borderColor: 'green',
+        backgroundColor:'green',
+        color:'white'
+      },
+      {
+        label: 'Expenses',
+        data: expenses, // Array of expense amounts
+        fill: false,
+        borderColor: 'red',
+        backgroundColor:'red',
+        color:'white'
+      },
+    ],
+  };
 
-        datasets: [
-            {
-                label: "Income",
-                data: [
-                    ...incomes.map((income) => {
-                        const { amount } = income;
-                        return amount;
-                    }),
-                ],
-                backgroundColor: "green",
-            },
+  const options = {
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white', // Set label color to white
+        },
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          color: 'rgba(240, 240, 240, 0.5)', // Lightish white color for x-axis grid lines
+        },
+        ticks: {
+          color: 'rgba(240, 240, 240, 0.8)', // Lightish white color for x-axis labels
+        },
+      },
+      y: {
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Change the color of the y-axis grid lines to white
+        },
+        ticks: {
+          color:'rgba(240, 240, 240, 0.5)' // Make x-axis labels bold
+        },
+      },
+    },
+  };
+  return (
+    <div className='container'>
+      <h3>Income and Expenses Over Time</h3>
+      <Line data={data} options={options} />
+    </div>
+  );
 
-            {
-                label: "expenses",
-                data: [
-                    ...expenses.map((expense) => {
-                        const { amount } = expense;
-                        return amount;
-                    }),
-                ],
-                backgroundColor: "red",
-            },
-        ],
-    };
-
-    return (
-        <div className="container">
-            <Line data={data} ></Line>
-            <h1>chart</h1>
-        </div>
-    );
 }
 
 export default Chart;

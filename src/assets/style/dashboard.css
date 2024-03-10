@@ -1,3 +1,32 @@
+
+.container h1{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+  .progress{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.circle h3{
+    padding: 5px;
+    /* margin-bottom: 10px; */
+}
+.statistics{
+    display: flex;
+    flex-direction: column;
+}
+.statistics h2,h3{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* margin-top: 5px; */
+}
+.chartLine{
+    margin-top: 6px;
+}
+
 .chart {
     width: 100%; /* Set desired width */
     height: 400px; /* Set desired height */
