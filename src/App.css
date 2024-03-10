@@ -6,10 +6,10 @@
     color: var(--text-color);
 }
 :root {
-    --primary: #76ABAE;
-    --background: #222831;
-    --secondary: #31363F;
-    --text-color: #EEEEEE;
+    --primary: #FFBB48;
+    --background: #fff;
+    --secondary: #FFCD79;
+    --text-color: #151515;
 }
 
 body{
