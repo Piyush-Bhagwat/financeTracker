@@ -27,10 +27,10 @@ const getCategories = async (uid) => {
     console.log(categories);
 };
 
-const addCategory = async (uid, category) => {
+const addCategory = async (uid, categoryData) => {
     const colRef = collection(db, `users/${uid}/categories`);
 
-    await addDoc(colRef, category);
+    await addDoc(colRef, categoryData);
     console.log("added a category");
 };
 
