@@ -6,20 +6,37 @@ import { useGlobalContext } from "../context/Context";
 const Transactions = () => {
     const { transactions } = useGlobalContext();
 
+    const getDate = (time) => {
+        const t = new Date(time);
+
+        return `${t.getDate()}/${t.getMonth()+1}/${t.getFullYear()}`;
+    };
+
     const renderCards = () => {
+        let prevDate = "null";
         return (
             <>
                 {transactions?.map((trans) => {
+                    let curDate = getDate(trans.time);
+                    let sameDate = prevDate === curDate;
+                    console.log(trans.time, curDate);
+                    if (!sameDate) {
+                        prevDate = curDate;
+                    }
+
                     return (
-                        <TransactionCard
-                            amount={trans.amount}
-                            key={trans.id}
-                            category={trans.category}
-                            type={trans.type}
-                            note={trans.note}
-                            time={trans.time}
-                            mode = {trans.mode}
-                        />
+                        <>
+                            {!sameDate && <h3 className="date">{curDate}</h3>}
+                            <TransactionCard
+                                amount={trans.amount}
+                                key={trans.id}
+                                category={trans.category}
+                                type={trans.type}
+                                note={trans.note}
+                                time={trans.time}
+                                mode={trans.mode}
+                            />
+                        </>
                     );
                 })}
             </>
