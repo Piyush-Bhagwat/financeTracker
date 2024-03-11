@@ -1,33 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "../assets/style/header.css";
+import { logout } from "../database/auth.db";
+import { useGlobalContext } from "../context/Context";
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const { user, setUser } = useGlobalContext();
 
   const handleImageClick = () => {
-    setShowDropdown(!showDropdown);
+    setShowDropdown((p) => !p);
   };
 
   const handleLogout = () => {
-    // Handle logout functionality here
-    // For example: clear session, redirect to login page, etc.
-    // You can implement the logout functionality based on your application's requirements
+    logout();
+    setUser(null);
     console.log("Logout clicked");
   };
 
   return (
-    <header className='header'>
-        <div className='header-logo'>
-            logo
-        </div>
-        <div className='header-img' onClick={handleImageClick}>
-            <img src="https://media.istockphoto.com/id/1265032285/photo/portrait-of-young-girl-with-clean-skin-and-soft-makeup.jpg?s=612x612&w=0&k=20&c=GcrInK2xkdxcInX0quxPrdFGkv8DXXDPShUia2T1pv4=" alt="profile" />
-            {showDropdown && (
-              <div className="dropdown">
-                <button>Logout</button>
-              </div>
-            )}
-        </div>
+    <header className="header">
+      <div className="header-logo">logo</div>
+      <div className="header-img" onClick={user !== null ? handleImageClick : null}>
+        {user === null ? (
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX5DWWYRWd7uysUpQK690_mjjaBPgll2-V0Q&usqp=CAU"
+            alt="profile"
+          />
+        ) : (
+          <img
+            src= {`${user.photoURL}`}
+            alt="profile"
+          />
+        )}
+        {showDropdown && (
+          <div className="dropdown">
+            <button onClick={() => handleLogout()}>Logout</button>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
