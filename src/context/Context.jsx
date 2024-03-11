@@ -14,11 +14,11 @@ import {
 } from "react-firebase-hooks/firestore";
 import { collection, doc, orderBy, query } from "firebase/firestore";
 import { db } from "../database/config.db";
-import { getTransactionQuery } from "../database/transaction.db";
-
-const defaultIncomes = [3000, 1000, 500];
-
-const defaultExpenses = [1000, 300, 200];
+import {
+    getAllExpenses,
+    getAllIncome,
+    getTransactionQuery,
+} from "../database/transaction.db";
 
 const chartContext = createContext();
 
@@ -31,8 +31,8 @@ export const ContextProvider = ({ children }) => {
     const [bankBal, setBankBal] = useState(null);
     const curDate = new Date(date);
 
-    const [incomes, setIncomes] = useState(defaultIncomes);
-    const [expenses, setExpenses] = useState(defaultExpenses);
+    const [incomes, setIncomes] = useState(null);
+    const [expenses, setExpenses] = useState(null);
 
     const [categories, setCategories] = useState(null);
     const [transactions, setTransaction] = useState(null);
@@ -49,9 +49,12 @@ export const ContextProvider = ({ children }) => {
     
     const [transactionsSnap] = useCollection(transactionQuery);
 
-    const totalIncome = incomes.reduce((total, income) => total + income, 0);
-    const totalExpenses = expenses.reduce(
-        (total, expense) => total + expense,
+    const totalIncome = incomes?.reduce(
+        (total, income) => total + parseFloat(income.amount),
+        0
+    );
+    const totalExpenses = expenses?.reduce(
+        (total, expense) => total + parseFloat(expense.amount),
         0
     );
 
@@ -70,6 +73,26 @@ export const ContextProvider = ({ children }) => {
         if (userID) {
             setUid(userID);
         }
+    };
+
+    const getIncome = async () => {
+        const incoms = await getAllIncome(
+            user?.uid,
+            curDate.getMonth(),
+            curDate.getFullYear()
+        );
+
+        setIncomes(incoms?.data);
+    };
+
+    const getExpence = async () => {
+        const incoms = await getAllExpenses(
+            user?.uid,
+            curDate.getMonth(),
+            curDate.getFullYear()
+        );
+
+        setExpenses(incoms?.data);
     };
     const totalBalance = totalIncome - totalExpenses;
 
@@ -107,6 +130,8 @@ export const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (user) console.log("user Update", user);
+        getIncome();
+        getExpence();
     }, [user]);
 
     useEffect(() => {
