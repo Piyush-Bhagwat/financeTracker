@@ -1,118 +1,119 @@
-/* addtransaction.css */
-
 .add-transaction {
-    width: 400px;
-    margin: 30px auto; /* Increased margin */
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dropdowns {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px; 
-  }
-  
-  .select-dropdown {
-    width: calc(50% - 5px);
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 16px;
-    outline: none;
-    color: #495057; 
-    transition: border-color 0.3s ease;
-  }
-  
-  .select-dropdown:hover {
-    width: calc(50% - 5px);
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 16px;
-    outline: none;
-    color: #495057;
-    transition: border-color 0.3s ease;
-  }
-  
-  .transaction-type{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .type-dropdown{
-    width: 50%;
+@media (max-width: 768px) {
+  .add-transaction {
+    width: 90%; 
   }
+}
 
-  .amount-entry {
-    margin-bottom: 20px; /* Increased margin */
-  }
-  
+.dropdowns {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.transaction-dropdown,
+.category-dropdown {
+  background-color: #87ceeb;
+  color: #333;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  font-size: 13px;
+  width: 150px;
+  outline: none;
+}
+
+.category-dropdown {
+  background-color: #a7f1a4;
+}
+
+.transaction-dropdown option,
+.category-dropdown option {
+  background-color: white;
+  color: black;
+}
+
+.transaction-dropdown:focus,
+.category-dropdown:focus {
+  outline: none;
+}
+
+.select-dropdown:last-child {
+  margin-right: 0;
+}
+
+.transaction-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.type-dropdown {
+  width: 100px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 13px;
+  color: #555;
+  border: none;
+  outline: none;
+}
+
+.type-dropdown option {
+  color: black;
+}
+
+.amount-entry {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.amount-input,
+.comment-input {
+  width: 70%;
+  padding: 15px;
+  background-color: transparent;
+  font-size: 30px;
+  font-weight: bolder;
+  color: black;
+  border: 2px solid transparent;
+  outline: none;
+  text-align: center;
+}
+
+.comment-input {
+  font-size: 15px;
+  font-weight: bold;
+  color: #555;
+}
+
+@media (max-width: 425px) {
   .amount-input,
   .comment-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 16px;
-    outline: none;
-    color: #495057; /* Darker text color */
-    transition: border-color 0.3s ease;
-    margin-bottom: 10px;
+    width: 90%; 
+    font-size: 20px; 
   }
-  
-  .amount-input:focus,
-  .comment-input:focus {
-    border-color: #6c757d;
-  }
-  
-  .keypad {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-  
-  .number-btn,
-  .backspace-btn {
-    width: calc(25% - 5px);
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    color: #495057;
-    transition: background-color 0.3s ease;
-  }
-  
-  .number-btn:hover,
-  .backspace-btn:hover {
-    background-color: #e9ecef;
-  }
-  
-  .submit-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-btn:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+  @media (max-width: 768px) {
+    .amount-input,
+    .comment-input {
+      width: 90%; 
+      font-size: 20px; 
+    }
+}

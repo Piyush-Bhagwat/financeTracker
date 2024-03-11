@@ -13,9 +13,9 @@ function App() {
         <div>
             <Header />
             <Outlet />
-            <BottomBar />
+            <Bottombar />
 
-            <Dashboard />
+            {/* <Dashboard /> */}
         </div>
     );
 }
