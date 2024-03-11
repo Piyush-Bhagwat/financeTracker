@@ -14,8 +14,6 @@ function App() {
             <Header />
             <Outlet />
             <Bottombar />
-
-            {/* <Dashboard /> */}
         </div>
     );
 }
