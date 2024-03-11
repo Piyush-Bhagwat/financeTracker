@@ -1,0 +1,70 @@
+/* Wallet Container */
+.wallet-container {
+    background-color: #212121; /* Dark background color */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    max-width: 340px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  /* Wallet Header */
+  .wallet-header {
+    background-color: #1565c0; /* Dark blue header color */
+    color: white;
+    font-size:15px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: -20px -20px 20px -20px;
+  }
+  
+  /* Wallet Info */
+  .wallet-info {
+    background-color: #f5f5f5; /* Light gray background for wallet info */
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Wallet */
+  .wallet {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Wallet Icon */
+  .wallet-icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  /* Wallet Details */
+  .wallet-details p {
+    margin: 0;
+  }
+  
+  /* Primary Wallet Background */
+  .primary {
+    background-color: #4caf50; /* Light green background for primary wallet */
+  }
+  
+  /* Secondary Wallet Background */
+  .secondary {
+    background-color: #2196f3; /* Dark blue background for secondary wallet */
+  }
+  
+  /* Add Wallet Button */
+  .add-wallet-btn {
+    background-color: #1565c0; /* Dark blue button color */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  

@@ -5,6 +5,7 @@ import "../assets/style/transactions.css";
 const Transactions = () => {
   return (
     <div className='transactions'  >
+      
       <TransactionCard/> 
     </div>
   )
