@@ -1,46 +1,51 @@
-import React, { useState } from 'react';
-import Keypad from './Keypad';
+import React, { useState } from "react";
+import Keypad from "./Keypad";
+import { setBalance } from "../database/user.db";
+import { useGlobalContext } from "../context/Context";
 
-const Model = ({ amount, setAmount, setIsModelOpen }) => {
+const Model = ({ whereTo, amount, setAmount, setIsModelOpen }) => {
+    const { user } = useGlobalContext();
     const [amt, setAmt] = useState(amount === 0 ? "" : amount);
-  
+
     const handleNumberClick = (value) => {
-      setAmt(prevAmt => prevAmt + value);
+        setAmt((prevAmt) => prevAmt + value);
     };
-  
+
     const handleBackspace = () => {
-      setAmt(prevAmt => prevAmt.slice(0, -1));
+        setAmt((prevAmt) => prevAmt.slice(0, -1));
     };
-  
+
     const handleClear = () => {
-      setAmt("");
+        setAmt("");
     };
-  
-    const handleSubmit = () => {
-      setAmount(amt);
-      setIsModelOpen(false);
+
+    const handleSubmit = async () => {
+        setAmount(amt);
+        console.log(amt);
+        await setBalance(user.uid, amt, whereTo);
+        setIsModelOpen(false);
     };
-  
+
     return (
-      <div>
         <div>
-          <input
-            type="text"
-            className="amount-input"
-            value={`₹${amt}`}
-            readOnly
-          />
+            <div>
+                <input
+                    type="text"
+                    className="amount-input"
+                    value={`₹${amt}`}
+                    readOnly
+                />
+            </div>
+            <div>
+                <Keypad
+                    handleNumberClick={handleNumberClick}
+                    handleBackspace={handleBackspace}
+                    handleClear={handleClear}
+                    handleSubmit={handleSubmit}
+                />
+            </div>
         </div>
-        <div>
-          <Keypad
-            handleNumberClick={handleNumberClick}
-            handleBackspace={handleBackspace}
-            handleClear={handleClear}
-            handleSubmit={handleSubmit}
-          />
-        </div>
-      </div>
     );
-  };
-  
+};
+
 export default Model;

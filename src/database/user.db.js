@@ -7,11 +7,16 @@ import {
 } from "@firebase/firestore";
 import { db } from "./config.db";
 
-const setBalance = async (uid, balanceAmount) => {
+const setBalance = async (uid, balanceAmount, mode) => {
     const colRef = doc(db, "users", uid);
 
-    await updateDoc(colRef, { balance: balanceAmount });
-    console.log("balance updated");
+    const toUpdate =
+        mode === "cash"
+            ? { cashBal: balanceAmount }
+            : { bankBal: balanceAmount };
+
+    await updateDoc(colRef, toUpdate);
+    console.log("balance updated", toUpdate);
 };
 
 const getCategories = async (uid) => {

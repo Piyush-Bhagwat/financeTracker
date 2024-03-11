@@ -1,18 +1,40 @@
-import React from 'react';
+import React , {useEffect, useState} from 'react';
 import { Line } from 'react-chartjs-2';
 import { useGlobalContext } from '../../context/Context';
-
+import { getAllIncome, getAllExpenses } from '../../database/transaction.db';
+import { uid } from '../../context/Context'
 function Chart() {
-  const { incomes, expenses } = useGlobalContext();
+  const { incomes, expenses, user } = useGlobalContext();
+  const [labels, setLabels] = useState([]);
+  
 
-  // Assuming incomes and expenses are arrays of numbers representing amounts over time
+  useEffect(() => {
+    const fetchData = async () => {
+      const currentMonth = (new Date()).getMonth() + 1; 
+      const currentYear = (new Date()).getFullYear();
+      
+      const incomeData = await getAllIncome(uid, currentMonth, currentYear);
+      const expenseData = await getAllExpenses(uid, currentMonth, currentYear);
+
+      const allData = [...incomeData.data, ...expenseData.data];
+      const uniqueMonths = [...new Set(allData.map(item => item.date.getMonth()))];
+      
+      const monthNames = uniqueMonths.map(month => {
+        return new Date(0, month).toLocaleString('en-US', { month: 'long' });
+      });
+      
+      setLabels(monthNames);
+    };
+
+    fetchData();
+  }, []);
 
   const data = {
     labels: ['January', 'February', 'March'], // Example labels for months
     datasets: [
       {
         label: 'Income',
-        data: incomes, // Array of income amounts
+        data:incomes ? incomes.map(income => income.amount) : [], 
         fill: false,
         borderColor: 'green',
         backgroundColor:'green',
@@ -21,7 +43,7 @@ function Chart() {
       },
       {
         label: 'Expenses',
-        data: expenses, // Array of expense amounts
+        data:expenses ? expenses.map(expense => expense.amount) : [],
         fill: false,
         borderColor: 'red',
         backgroundColor:'red',
@@ -35,7 +57,7 @@ function Chart() {
     plugins: {
       legend: {
         labels: {
-          color: 'white', // Set label color to white
+          color: 'white', 
         },
       },
     },
@@ -60,7 +82,6 @@ function Chart() {
   };
   return (
     <div className='container'>
-      <h3>Income and Expenses Over Time</h3>
       <Line data={data} options={options} />
     </div>
   );
