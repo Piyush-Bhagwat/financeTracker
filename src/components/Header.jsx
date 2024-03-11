@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const { user, setUser,active, setActive  } = useGlobalContext();
+  const { user, uid, setUid, setActive  } = useGlobalContext();
 
     const handleImageClick = () => {
         setShowDropdown((p) => !p);
@@ -15,7 +15,7 @@ const Header = () => {
 
     const handleLogout = () => {
         logout();
-        setUser(null);
+        setUid(null);
         localStorage.removeItem("user");
         console.log("Logout clicked");
     };
@@ -36,15 +36,15 @@ const Header = () => {
       </div>
       <div
         className="header-img"
-        onClick={user !== null ? handleImageClick : null}
+        onClick={uid !== null ? handleImageClick : null}
       >
-        {user === null ? (
+        {uid === null ? (
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX5DWWYRWd7uysUpQK690_mjjaBPgll2-V0Q&usqp=CAU"
             alt="profile"
           />
         ) : (
-          <img src={`${user.photoURL}`} alt="profile" />
+          <img src={`${user?.photoURL}`} alt="profile" />
         )}
         {showDropdown && (
           <div className="dropdown">

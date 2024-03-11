@@ -1,133 +1,133 @@
 .home {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .home-header {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .balance {
-    width: 300px ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 40px;
-    border: solid 1px white;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  
-  .balance span {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .balance span:last-child {
-    font-size: 28px;
-  }
-  
-  .summary {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: space-evenly;
-  }
-  
-  .income,
-  .expenses {
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: solid 1px white;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  
-  .income span,
-  .expenses span {
-    font-size: 16px;
-  }
-  
-  .income span:first-child,
-  .expenses span:first-child {
-    margin-bottom: 5px;
-  }
-  
-  .income span:last-child,
-  .expenses span:last-child {
-    font-size: 20px;
-  }
-  
-  .recent-transactions {
-    margin-top: 40px;
-    position: relative;
-  }
-  
-  .recent-transactions h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .view-all {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .view-all:hover {
-    background-color: #0056b3;
-  }
-  
-  /* TransactionCard component styles */
-  .transaction-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  .transaction-card .amount {
-    font-size: 16px;
-  }
-  
-  .transaction-card .category {
-    font-size: 14px;
-  }
-  
-  .transaction-card .type {
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .transaction-card .note {
-    font-size: 14px;
-  }
-  
-  .transaction-card .time {
-    font-size: 12px;
-    color: #666;
-  }
-  
-  .transaction-card .mode {
-    font-size: 12px;
-    color: #666;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.balance {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.balance span {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.balance span:last-child {
+  font-size: 28px;
+}
+
+.summary {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.income,
+.expenses {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.income span,
+.expenses span {
+  font-size: 16px;
+}
+
+.income span:first-child,
+.expenses span:first-child {
+  margin-bottom: 5px;
+}
+
+.income span:last-child,
+.expenses span:last-child {
+  font-size: 20px;
+}
+
+.recent-transactions {
+  margin-top: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.recent-transactions h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.view-all {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.view-all:hover {
+  background-color: #0056b3;
+}
+
+/* TransactionCard component styles */
+.transaction-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.transaction-card .amount {
+  font-size: 16px;
+}
+
+.transaction-card .category {
+  font-size: 14px;
+}
+
+.transaction-card .type {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.transaction-card .note {
+  font-size: 14px;
+}
+
+.transaction-card .time {
+  font-size: 12px;
+  color: #666;
+}
+
+.transaction-card .mode {
+  font-size: 12px;
+  color: #666;
+}
