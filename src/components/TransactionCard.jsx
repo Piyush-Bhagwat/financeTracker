@@ -4,24 +4,22 @@ import { useGlobalContext } from "../context/Context";
 
 const TransactionCard = ({ type, mode, category, amount, note, time }) => {
     const { categories } = useGlobalContext();
-    let color, emoji;
+    let color, emoji, categoryName;
+
     const readCategory = () => {
-        const cat = categories?.find((cat) => cat.id == category);
-        category = cat.name;
-        emoji = cat.emoji;
-        color = cat.color;
+        const cat = categories?.find((cat) => cat.id === category);
+        categoryName = cat?.name;
+        emoji = cat?.emoji;
+        color = cat?.color;
     };
 
     const getTime = () => {
         const date = new Date(time);
-
         const hour = date.getHours();
         const min = date.getMinutes();
-
-        time = `${hour % 12 !== 0 ? hour % 12 : "12"}:${
-            min < 9 ? "0" + min : min
-        } ${hour >= 12 ? "pm" : "am"}`;
+        time = `${hour % 12 !== 0 ? hour % 12 : "12"}:${min < 10 ? "0" + min : min} ${hour >= 12 ? "pm" : "am"}`;
     };
+
     getTime();
     readCategory();
 
@@ -39,17 +37,16 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
             <div className="details">
                 <div className="up">
                     <span className="cat">
-                        {type === "income" ? "Income" : category}
+                        {type === "income" ? "Income" : categoryName}
                     </span>
                     <span className="amount">
                         <span className="mode">{mode}</span>
                         <span
                             style={{
-                                color:
-                                    type === "income" ? "#2a8c2a" : "#e94040",
+                                color: type === "income" ? "#2a8c2a" : "#e94040",
                             }}
                         >
-                            {` ${type === "income" ? "+" : "-"}${amount}`}
+                            {`${type === "income" ? "+" : "-"}${amount}`}
                         </span>
                     </span>
                 </div>
