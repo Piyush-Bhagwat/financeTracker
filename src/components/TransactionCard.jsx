@@ -43,7 +43,14 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
                     </span>
                     <span className="amount">
                         <span className="mode">{mode}</span>
-                        {` ${type === "income" ? "+" : "-"}${amount}`}
+                        <span
+                            style={{
+                                color:
+                                    type === "income" ? "#2a8c2a" : "#e94040",
+                            }}
+                        >
+                            {` ${type === "income" ? "+" : "-"}${amount}`}
+                        </span>
                     </span>
                 </div>
                 <div className="down">
