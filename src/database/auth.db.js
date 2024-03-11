@@ -8,15 +8,12 @@ const login = async () => {
 
     const userExist = await checkUserExist(user.uid);
 
-    console.log(user);
-
     if (!userExist) {
-        createNewUser(user);
-    } else {
-        console.log("user logged in");
+        await createNewUser(user);
     }
 
-    return user;
+    const userData = await getCurrentUser(user.uid);
+    return userData;
 };
 
 const loginWithGoogle = async () => {
@@ -52,6 +49,13 @@ const createNewUser = async (user) => {
         await addDoc(colRef, cat);
     });
     console.log("new user created");
+};
+
+const getCurrentUser = async (uid) => {
+    const docRef = doc(db, "users", uid);
+    const data = (await getDoc(docRef)).data();
+
+    return data;
 };
 
 export { login, checkUserExist };
