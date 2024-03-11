@@ -16,3 +16,7 @@ body{
     background-color: var(--background);
     margin: 0;
 }
+
+.bottom-filling{
+    margin-bottom: 20%;
+}

@@ -12,12 +12,19 @@ function App() {
     return (
         <div>
             <Header />
+
             { user === null ?
             <Login/>
             :
             <>
-            <Outlet />
-            <BottomBar />
+              <Outlet />
+
+              <main>
+                  <Outlet />
+              </main>
+              <div className="bottom-filling"></div>
+
+              <BottomBar />
             </>
             }
             {/* <Dashboard /> */}
