@@ -25,7 +25,7 @@ export const ContextProvider = ({ children }) => {
     const [categoriesSnap] = useCollection(
         collection(db, `users/${user?.uid}/categories`)
     );
-    const [transactionsSnap] = useCollectionData(
+    const [transactionsSnap] = useCollection(
         collection(db, `users/${user?.uid}/transactions`)
     );
 
@@ -73,6 +73,8 @@ export const ContextProvider = ({ children }) => {
             return { id: cat.id, ...cat.data() };
         });
 
+        // console.log(transactionsSnap);
+
         setTransaction(newTrans);
     }, [transactionsSnap]);
 
@@ -99,6 +101,8 @@ export const ContextProvider = ({ children }) => {
         totalExpenses,
         totalBalance,
         user,
+        categories,
+        transactions,
         setUser,
         handleLogin,
     };
