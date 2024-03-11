@@ -9,7 +9,10 @@ function App() {
     return (
         <div>
             <Header />
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
+            <div className="bottom-filling"></div>
             <BottomBar />
 
             {/* <Dashboard /> */}
