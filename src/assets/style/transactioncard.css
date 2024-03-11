@@ -1,4 +1,4 @@
-/* transactioncard.css */
+
 
 .transaction-card {
   display: flex;
@@ -57,3 +57,4 @@
 .down {
   font-size: 0.8em;
 }
+
