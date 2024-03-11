@@ -9,7 +9,7 @@ const Transactions = () => {
     const getDate = (time) => {
         const t = new Date(time);
 
-        return `${t.getDate()}/${t.getMonth()+1}/${t.getFullYear()}`;
+        return `${t.getDate()}/${t.getMonth() + 1}/${t.getFullYear()}`;
     };
 
     const renderCards = () => {
@@ -19,7 +19,6 @@ const Transactions = () => {
                 {transactions?.map((trans) => {
                     let curDate = getDate(trans.time);
                     let sameDate = prevDate === curDate;
-                    console.log(trans.time, curDate);
                     if (!sameDate) {
                         prevDate = curDate;
                     }
