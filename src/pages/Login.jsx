@@ -5,11 +5,8 @@ import { login } from "../database/auth.db";
 import { useGlobalContext } from "../context/Context";
 
 const Login = () => {
-    const { setUser } = useGlobalContext();
-    const handleLogin = async () => {
-        const userData = await login();
-        setUser(userData);
-    };
+    const { handleLogin } = useGlobalContext();
+    
 
     return (
         <div className="login">

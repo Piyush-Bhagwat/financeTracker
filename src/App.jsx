@@ -7,19 +7,23 @@ import { useGlobalContext } from "./context/Context";
 import Login from "./pages/Login";
 
 function App() {
-    const {user} = useGlobalContext();
+    const { user } = useGlobalContext();
     return (
         <div>
             <Header />
-            { user === null ?
-            <Login/>
-            :
-            <>
-            <Outlet />
-            <BottomBar />
-            </>
-            }
 
+            {user === null ? (
+                <Login />
+            ) : (
+                <>
+                    <main>
+                        <Outlet />
+                    </main>
+                    <div className="bottom-filling"></div>
+
+                    <BottomBar />
+                </>
+            )}
         </div>
     );
 }

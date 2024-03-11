@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/style/header.css";
 import { logout } from "../database/auth.db";
 import { useGlobalContext } from "../context/Context";
@@ -9,15 +9,22 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { user, setUser,active, setActive  } = useGlobalContext();
 
-  const handleImageClick = () => {
-    setShowDropdown((p) => !p);
-  };
+    const handleImageClick = () => {
+        setShowDropdown((p) => !p);
+    };
 
-  const handleLogout = () => {
-    logout();
-    setUser(null);
-    console.log("Logout clicked");
-  };
+    const handleLogout = () => {
+        logout();
+        setUser(null);
+        localStorage.removeItem("user");
+        console.log("Logout clicked");
+    };
+    const currentRoute = window.location.pathname.substring(1);
+    useEffect(()=>{
+        if(currentRoute===""){
+            setActive(0);
+        }
+    },[currentRoute])
 
   return (
     <header className="header">

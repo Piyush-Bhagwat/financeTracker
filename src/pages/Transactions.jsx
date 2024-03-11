@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import TransactionCard from '../components/TransactionCard';
+import "../assets/style/transactions.css";
 
 const Transactions = () => {
   return (
-    <div  >Transactions</div>
+    <div className='transactions'  >
+      <TransactionCard/> 
+    </div>
   )
 }
 
