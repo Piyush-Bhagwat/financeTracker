@@ -76,7 +76,6 @@ function Dashboard() {
 
     return (
         <div className="container">
-            <h1>All Transactions</h1>
             <div className="statistics">
                 <div className="chart">
                     <h2>Total Income Vs Total Expenses</h2>
