@@ -1,6 +1,8 @@
 .transactions {
+  padding: 3% 3%;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh;
- }
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+  flex-direction: column;
+}

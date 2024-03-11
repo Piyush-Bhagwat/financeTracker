@@ -1,5 +1,7 @@
-import React from 'react';
-import "../assets/style/wallet.css"
+import React from "react";
+import "../assets/style/wallet.css";
+import Keypad from "../components/Keypad";
+import WalletCard from "../components/WalletCard";
 
 const Wallet = () => {
   return (
@@ -7,25 +9,30 @@ const Wallet = () => {
       <header className="wallet-header">
         <h1>Wallets</h1>
       </header>
-      <div className="wallet-info">
-        <div className="wallet primary">
-          <div className="wallet-icon">🏦</div>
-          <div className="wallet-details">
-            <p>Checking ***11365</p>
-            <p>Swiss Bank</p>
-          </div>
+      {/* <WalletCard /> */}
+      <div className="wallet primary">
+        <div className="wallet-icon">🏦</div>
+        <div className="wallet-details">
+          <span>Bank</span>
+          <span>₹ 10000</span>
         </div>
-        <div className="wallet secondary">
-          <div className="wallet-icon">📧</div>
-          <div className="wallet-details">
-            <p>devmulkalwar95@gmail.com</p>
-            <p>Dev Mulkalwar</p>
-          </div>
+        <div className="add-amt">
+          <button>Add amount</button>
         </div>
       </div>
-      <button className="add-wallet-btn">Add New Wallet</button>
+
+      <div className="wallet primary">
+        <div className="wallet-icon">💵</div>
+        <div className="wallet-details">
+          <span>Cash</span>
+          <span>₹ 10000</span>
+        </div>
+        <div className="add-amt">
+          <button>Add amount</button>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default Wallet
+export default Wallet;

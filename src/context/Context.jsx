@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { login } from "../database/auth.db";
+import { getCategories } from "../database/user.db";
+import {
+    useCollectionData,
+    useCollection,
+} from "react-firebase-hooks/firestore";
+import { collection, orderBy, query } from "firebase/firestore";
+import { db } from "../database/config.db";
 
 const defaultIncomes = [3000, 1000, 500];
 
@@ -8,7 +15,6 @@ const defaultExpenses = [1000, 300, 200];
 const chartContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-
     const [active, setActive] = useState();
 
     const [incomes, setIncomes] = useState(defaultIncomes);
@@ -16,6 +22,18 @@ export const ContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState(null);
+
+    const [transactions, setTransaction] = useState(null);
+
+    const [categoriesSnap] = useCollection(
+        collection(db, `users/${user?.uid}/categories`)
+    );
+
+    const transactionQuery = query(
+        collection(db, `users/${user?.uid}/transactions`),
+        orderBy("time", "desc")
+    );
+    const [transactionsSnap] = useCollection(transactionQuery);
 
     const totalIncome = incomes.reduce((total, income) => total + income, 0);
     const totalExpenses = expenses.reduce(
@@ -41,16 +59,44 @@ export const ContextProvider = ({ children }) => {
     };
     const totalBalance = totalIncome - totalExpenses;
 
-    //-------------on Page Load-----------------
+    //---------------------on Page Load-----------------------
     useEffect(() => {
         checkLoginData();
     }, []);
 
+    useEffect(() => {
+        //get categories
+        const newCat = categoriesSnap?.docs?.map((cat) => {
+            return { id: cat.id, ...cat.data() };
+        });
+
+        setCategories(newCat);
+    }, [categoriesSnap]);
+
+    useEffect(() => {
+        //get categories
+        const newTrans = transactionsSnap?.docs?.map((cat) => {
+            return { id: cat.id, ...cat.data() };
+        });
+
+        // console.log(transactionsSnap);
+
+        setTransaction(newTrans);
+    }, [transactionsSnap]);
+
     // -----------------All print statements------------------
 
     useEffect(() => {
-        console.log("user Update", user);
+        if (user) console.log("user Update", user);
     }, [user]);
+
+    useEffect(() => {
+        if (categories) console.log("Categories Update", categories);
+    }, [categories]);
+
+    useEffect(() => {
+        if (transactions) console.log("Transactions Update", transactions);
+    }, [transactions]);
 
     const value = {
         incomes,
@@ -61,10 +107,12 @@ export const ContextProvider = ({ children }) => {
         totalExpenses,
         totalBalance,
         user,
+        categories,
+        transactions,
         setUser,
-        active, 
+        active,
         setActive,
-        handleLogin
+        handleLogin,
     };
 
     return (
