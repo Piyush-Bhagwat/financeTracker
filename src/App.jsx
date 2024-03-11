@@ -1,12 +1,9 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
+
 import BottomBar from "./components/Bottombar";
-
-// import Dashboard from './components/dashboard/Dashboard';
-
 import Dashboard from "./components/dashboard/Dashboard";
-import { addCategory, getCategories } from "./database/user.db";
 
 function App() {
     return (
@@ -15,7 +12,7 @@ function App() {
             <Outlet />
             <BottomBar />
 
-            <Dashboard />
+            {/* <Dashboard /> */}
         </div>
     );
 }

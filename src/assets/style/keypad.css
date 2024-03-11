@@ -1,0 +1,31 @@
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .number-btn,
+  .backspace-btn,
+  .clear-btn,
+  .extended-btn {
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .number-btn:hover,
+  .backspace-btn:hover,
+  .clear-btn:hover,
+  .extended-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .extended-btn {
+    grid-row: span 3;
+  }
+  
