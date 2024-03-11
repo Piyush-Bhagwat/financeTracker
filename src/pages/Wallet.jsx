@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/style/wallet.css";
 import Model from "../components/Model";
 
+
 const Wallet = () => {
   const [totalAmt, setTotalAmt] = useState(0);
   const [cashAmt, setCashAmt] = useState(0);
@@ -26,6 +27,7 @@ const Wallet = () => {
         <h1>Wallets</h1>
         <h1>{`₹ ${totalAmt}`}</h1>
       </header>
+
 
       <div className="wallet primary">
         <div className="wallet-icon">🏦</div>
