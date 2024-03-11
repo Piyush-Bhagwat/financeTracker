@@ -1,0 +1,56 @@
+/* Wallet Container */
+.wallet-container {
+    background-color: #212121; /* Dark background color */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    max-width: 340px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+/* Wallet Card Styles */
+.wallet {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #e7f4e4; /* Light green background for primary wallet */
+  margin-bottom: 20px;
+}
+
+.wallet-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.wallet-details {
+  flex: 1;
+  
+}
+
+.wallet-details span {
+  display: block;
+  font-size: 18px;
+  color: black;
+}
+
+.add-amt {
+  margin-left: auto;
+}
+
+.add-amt button {
+  padding: 10px 20px;
+  background-color: #4caf50; /* Dark green button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-amt button:hover {
+  background-color: #388e3c; /* Darker green on hover */
+}
+
+  
