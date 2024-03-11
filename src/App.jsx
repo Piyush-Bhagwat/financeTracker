@@ -21,7 +21,7 @@ function App() {
                     </main>
                     <div className="bottom-filling"></div>
 
-                    <BottomBar />
+                    {/* <BottomBar /> */}
                 </>
             )}
         </div>
