@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { login } from "../database/auth.db";
 
 const defaultIncomes = [3000, 1000, 500];
 
@@ -18,7 +19,29 @@ export const ContextProvider = ({ children }) => {
         (total, expense) => total + expense,
         0
     );
+
+    // -------------Functions--------------------
+    const handleLogin = async () => {
+        const userData = await login();
+        setUser(userData);
+
+        localStorage.setItem("user", JSON.stringify(userData));
+    };
+
+    const checkLoginData = () => {
+        let userData = localStorage.getItem("user");
+        userData = JSON.parse(userData);
+
+        if (userData) {
+            setUser(userData);
+        }
+    };
     const totalBalance = totalIncome - totalExpenses;
+
+    //-------------on Page Load-----------------
+    useEffect(() => {
+        checkLoginData();
+    }, []);
 
     // -----------------All print statements------------------
 
@@ -35,7 +58,8 @@ export const ContextProvider = ({ children }) => {
         totalExpenses,
         totalBalance,
         user,
-        setUser
+        setUser,
+        handleLogin,
     };
 
     return (
