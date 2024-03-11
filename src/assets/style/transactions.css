@@ -1,0 +1,9 @@
+.transactions {
+  padding: 3% 3%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+  flex-direction: column;
+
+}
