@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import "../assets/style/addtransaction.css"
+import React, { useState } from "react";
+import "../assets/style/addtransaction.css";
+import Keypad from "../components/Keypad";
 
 const AddTransaction = () => {
-  const [amount, setAmount] = useState('');
-  const [comment, setComment] = useState('');
-  const [paymentMode, setPaymentMode] = useState('cash');
-  const [transactionCategory, setTransactionCategory] = useState('shopping');
-  const [transactionType, setTransactionType] = useState('expense');
+  const [amount, setAmount] = useState("");
+  const [comment, setComment] = useState("");
+  const [paymentMode, setPaymentMode] = useState("cash");
+  const [transactionCategory, setTransactionCategory] = useState("shopping");
+  const [transactionType, setTransactionType] = useState("expense");
 
   const handleNumberClick = (value) => {
     setAmount(amount + value);
@@ -20,12 +21,16 @@ const AddTransaction = () => {
     setComment(event.target.value);
   };
 
+  const handleClear = ()=>{
+    setAmount("");
+  }
+
   const handleSubmit = () => {
     // Submit the expense data
     console.log(`Amount: ₹${amount}, Comment: ${comment}`);
     // Reset the fields
-    setAmount('');
-    setComment('');
+    setAmount("");
+    setComment("");
   };
 
   return (
@@ -77,19 +82,12 @@ const AddTransaction = () => {
           onChange={handleCommentChange}
         />
       </div>
-      <div className="keypad">
-        {'1234567890'.split('').map((number) => (
-          <button className="number-btn" key={number} onClick={() => handleNumberClick(number)}>
-            {number}
-          </button>
-        ))}
-        <button className="backspace-btn" onClick={handleBackspace}>
-          X
-        </button>
-      </div>
-      <button className="submit-btn" onClick={handleSubmit}>
-       Add Transaction
-      </button>
+      <Keypad
+        handleNumberClick={handleNumberClick}
+        handleBackspace={handleBackspace}
+        handleClear={handleClear}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 };

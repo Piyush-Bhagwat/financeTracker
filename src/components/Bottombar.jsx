@@ -17,10 +17,10 @@ const Bottombar = () => {
     { route: "wallet", icon: <IoWalletOutline /> },
   ];
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState();
+  const currentRoute = window.location.pathname.substring(1);
 
   useEffect(() => {
-    const currentRoute = window.location.pathname.substring(1);
     switch (currentRoute) {
       case "":
         setActive(0);
@@ -40,7 +40,7 @@ const Bottombar = () => {
       default:
         return;
     }
-  }, [window.location.pathname]);
+  }, [currentRoute]);
 
   const createMenus = () => {
     return menus.map((menu, i) => (
