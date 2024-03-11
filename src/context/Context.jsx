@@ -5,7 +5,7 @@ import {
     useCollectionData,
     useCollection,
 } from "react-firebase-hooks/firestore";
-import { collection } from "firebase/firestore";
+import { collection, orderBy, query } from "firebase/firestore";
 import { db } from "../database/config.db";
 
 const defaultIncomes = [3000, 1000, 500];
@@ -15,7 +15,6 @@ const defaultExpenses = [1000, 300, 200];
 const chartContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-
     const [active, setActive] = useState();
 
     const [incomes, setIncomes] = useState(defaultIncomes);
@@ -23,14 +22,18 @@ export const ContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState(null);
+
     const [transactions, setTransaction] = useState(null);
 
     const [categoriesSnap] = useCollection(
         collection(db, `users/${user?.uid}/categories`)
     );
-    const [transactionsSnap] = useCollection(
-        collection(db, `users/${user?.uid}/transactions`)
+
+    const transactionQuery = query(
+        collection(db, `users/${user?.uid}/transactions`),
+        orderBy("time", "desc")
     );
+    const [transactionsSnap] = useCollection(transactionQuery);
 
     const totalIncome = incomes.reduce((total, income) => total + income, 0);
     const totalExpenses = expenses.reduce(
@@ -107,9 +110,9 @@ export const ContextProvider = ({ children }) => {
         categories,
         transactions,
         setUser,
-        active, 
+        active,
         setActive,
-        handleLogin
+        handleLogin,
     };
 
     return (
