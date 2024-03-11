@@ -1,21 +1,47 @@
 import React from "react";
 import "../assets/style/transactioncard.css";
+import { useGlobalContext } from "../context/Context";
 
-const TransactionCard = () => {
+const TransactionCard = ({ type, mode, category, amount, note, time }) => {
+    const { categories } = useGlobalContext();
+    let color, emoji;
+    const readCategory = () => {
+        const cat = categories?.find((cat) => cat.id == category);
+        category = cat.name;
+        emoji = cat.emoji;
+        color = cat.color;
+    };
+
+    const getTime = () => {
+        const date = new Date(time);
+
+        const hour = date.getHours();
+        const min = date.getMinutes();
+
+        time = `${hour % 12 !== 0 ? hour % 12 : "12"}:${
+            min < 9 ? "0" + min : min
+        } ${hour >= 12 ? "pm" : "am"}`;
+    };
+    getTime();
+    readCategory();
+
     return (
         <div className="transaction-card">
-            <div className="icon">🍽️</div>
+            <div className="icon" style={{ backgroundColor: color }}>
+                {emoji}
+            </div>
 
             <div className="details">
                 <div className="up">
-                    <span className="cat">Food</span>
+                    <span className="cat">{category}</span>
                     <span className="amount">
-                        <span className="mode">cash</span> +1000
+                        <span className="mode">{mode}</span>
+                        {` ${type === "income" ? "+" : "-"}${amount}`}
                     </span>
                 </div>
                 <div className="down">
-                    <span className="note">Dahi Samosa</span>
-                    <span className="time">3.14 pm</span>
+                    <span className="note">{note}</span>
+                    <span className="time">{time}</span>
                 </div>
             </div>
         </div>

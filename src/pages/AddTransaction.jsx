@@ -34,6 +34,7 @@ const AddTransaction = () => {
         // Submit the expense data
         const data = {
             amount,
+            mode: paymentMode,
             note: comment,
             type: transactionType,
             time: Date.now(),
