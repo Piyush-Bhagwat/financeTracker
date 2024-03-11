@@ -15,6 +15,9 @@ const defaultExpenses = [1000, 300, 200];
 const chartContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+
+    const [active, setActive] = useState();
+
     const [incomes, setIncomes] = useState(defaultIncomes);
     const [expenses, setExpenses] = useState(defaultExpenses);
 
@@ -104,7 +107,9 @@ export const ContextProvider = ({ children }) => {
         categories,
         transactions,
         setUser,
-        handleLogin,
+        active, 
+        setActive,
+        handleLogin
     };
 
     return (
