@@ -27,16 +27,30 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
 
     return (
         <div className="transaction-card">
-            <div className="icon" style={{ backgroundColor: color }}>
-                {emoji}
+            <div
+                className="icon"
+                style={{
+                    backgroundColor: type === "income" ? "#2a8c2a" : color,
+                }}
+            >
+                {type === "income" ? "🤑" : emoji}
             </div>
 
             <div className="details">
                 <div className="up">
-                    <span className="cat">{category}</span>
+                    <span className="cat">
+                        {type === "income" ? "Income" : category}
+                    </span>
                     <span className="amount">
                         <span className="mode">{mode}</span>
-                        {` ${type === "income" ? "+" : "-"}${amount}`}
+                        <span
+                            style={{
+                                color:
+                                    type === "income" ? "#2a8c2a" : "#e94040",
+                            }}
+                        >
+                            {` ${type === "income" ? "+" : "-"}${amount}`}
+                        </span>
                     </span>
                 </div>
                 <div className="down">
