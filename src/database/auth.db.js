@@ -16,6 +16,10 @@ const login = async () => {
     return userData;
 };
 
+const logout = async () => {
+    auth.signOut();
+};
+
 const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     const user = (await signInWithPopup(auth, provider)).user;
@@ -58,4 +62,4 @@ const getCurrentUser = async (uid) => {
     return data;
 };
 
-export { login, checkUserExist };
+export { login, checkUserExist, logout };
