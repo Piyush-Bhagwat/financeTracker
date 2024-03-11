@@ -34,28 +34,6 @@ const addCategory = async (uid, categoryData) => {
     console.log("added a category");
 };
 
-const getAllIncomes=async(uid)=>{
-    const colRef = collection(db, `users/${uid}/incomes`);
-    const snapShot = await getDocs(colRef);
-    const incomes = [];
-     
-    snapShot.forEach((cat) => {
-        incomes.push({ id: cat.id, ...cat.data() });
-    });
 
-    console.log(incomes);
-}
 
-const getAllExpenses=async(uid)=>{
-    const colRef = collection(db, `users/${uid}/expenses`);
-    const snapShot = await getDocs(colRef);
-    const expenses = [];
-    
-    snapShot.forEach((cat) => {
-        expenses.push({ id: cat.id, ...cat.data() });
-    });
-
-    console.log(expenses);
-}
-
-export { setBalance, getCategories, addCategory, getAllIncomes, getAllExpenses };
+export { setBalance, getCategories, addCategory};

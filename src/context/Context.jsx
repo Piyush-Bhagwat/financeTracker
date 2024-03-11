@@ -8,7 +8,7 @@ import {
 import { collection, orderBy, query } from "firebase/firestore";
 import { db } from "../database/config.db";
 import { getTransactionQuery } from "../database/transaction.db";
-import {getAllIncomes, getAllExpenses} from '../database/user.db'
+import {getAllIncome, getAllExpenses} from '../database/transaction.db'
 // const defaultIncomes = [3000, 1000, 500];
 
 // const defaultExpenses = [1000, 300, 200];
@@ -59,7 +59,7 @@ export const ContextProvider = ({ children }) => {
             const userMonth = curDate.getMonth();
             const userYear = curDate.getFullYear();
 
-            const fetchIncomes = await getAllIncomes(userUid, userMonth, userYear);
+            const fetchIncomes = await getAllIncome(userUid, userMonth, userYear);
             setIncomes(fetchIncomes);
 
             const fetchExpenses = await getAllExpenses(userUid, userMonth, userYear);
