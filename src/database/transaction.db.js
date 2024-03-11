@@ -1,4 +1,11 @@
-import { addDoc, collection, getDocs, query, where, orderBy } from "@firebase/firestore";
+import {
+    addDoc,
+    collection,
+    getDocs,
+    query,
+    where,
+    orderBy,
+} from "@firebase/firestore";
 import { db } from "./config.db";
 
 const addTransaction = async (uid, transactionData) => {
@@ -43,16 +50,18 @@ const getTransactionQuery = (uid, month, year) => {
 const getAllExpenses = async (uid, month, year) => {
     const q = getTransactionQuery(uid, month, year);
     const docSnapshot = (await getDocs(q)).docs;
+    console.log("snap", docSnapshot);
 
     let expense = 0;
-
+    const data = [];
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "expense") {
+            data.push({ id: doc.id, ...doc.data() });
             expense += parseFloat(doc.data().amount);
         }
     });
 
-    return expense;
+    return { total: expense, data };
 };
 
 const getAllIncome = async (uid, month, year) => {
@@ -60,14 +69,16 @@ const getAllIncome = async (uid, month, year) => {
     const docSnapshot = (await getDocs(q)).docs;
 
     let income = 0;
+    const data = [];
 
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "income") {
+            data.push({ id: doc.id, ...doc.data() });
             income += parseFloat(doc.data().amount);
         }
     });
 
-    return income;
+    return { total: income, data };
 };
 
 const fuckIt = () => {
