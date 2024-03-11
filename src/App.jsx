@@ -8,11 +8,11 @@ import Login from "./pages/Login";
 import { getAllExpenses } from "./database/transaction.db";
 
 function App() {
-    const { user } = useGlobalContext();
+    const { uid } = useGlobalContext();
     return (
         <div>
             <Header />
-            {user === null ? (
+            {uid === null ? (
                 <Login />
             ) : (
                 <>

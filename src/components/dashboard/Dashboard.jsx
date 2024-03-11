@@ -93,7 +93,7 @@ function Dashboard() {
                 <div className="progress">
                     <div className="circle">
                         <h3>Total Income</h3>
-                        <p>
+                        <div>
                             <Progress
                                 type="circle"
                                 strokeColor={"green"}
@@ -106,12 +106,12 @@ function Dashboard() {
                             ></Progress>
                             {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
                             {totalIncome}
-                        </p>
+                        </div>
                     </div>
 
                     <div className="circle">
                         <h3>Total Expenses</h3>
-                        <p>
+                        <div>
                             <Progress
                                 type="circle"
                                 strokeColor={"green"}
@@ -124,7 +124,7 @@ function Dashboard() {
                             ></Progress>
                             {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
                             {totalExpenses}
-                        </p>
+                        </div>
                     </div>
 
                     {/* <div className="balance">

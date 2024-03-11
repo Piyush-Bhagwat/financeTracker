@@ -90,7 +90,7 @@ const AddTransaction = () => {
                 >
                     {renderCatergories()}
                     <option value="">
-                        <button>Add more</button>
+                       Add More..
                     </option>
                 </select>
             </div>

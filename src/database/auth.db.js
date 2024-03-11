@@ -13,7 +13,7 @@ const login = async () => {
     }
 
     const userData = await getCurrentUser(user.uid);
-    return userData;
+    return user.uid;
 };
 
 const logout = async () => {
@@ -43,7 +43,8 @@ const createNewUser = async (user) => {
         photoURL: user.photoURL,
         email: user.email,
         name: user.displayName,
-        balance: 0,
+        bankBal: 0,
+        cashBal: 0,
     };
 
     await setDoc(doc(db, "users", user.uid), data);

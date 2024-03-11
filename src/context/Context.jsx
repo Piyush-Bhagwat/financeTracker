@@ -1,11 +1,18 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+    createContext,
+    useContext,
+    useEffect,
+    useId,
+    useState,
+} from "react";
 import { login } from "../database/auth.db";
 import { getCategories } from "../database/user.db";
 import {
     useCollectionData,
+    useDocumentData,
     useCollection,
 } from "react-firebase-hooks/firestore";
-import { collection, orderBy, query } from "firebase/firestore";
+import { collection, doc, orderBy, query } from "firebase/firestore";
 import { db } from "../database/config.db";
 import { getTransactionQuery } from "../database/transaction.db";
 
@@ -17,28 +24,29 @@ const chartContext = createContext();
 
 export const ContextProvider = ({ children }) => {
     const [active, setActive] = useState();
+    const [uid, setUid] = useState(null);
+    const [user] = useDocumentData(doc(db, `users/${uid}`)); //it will get realtime changes from balances
+    const [date, setDate] = useState(Date.now());
+    const [cashBal, setCashBal] = useState(null);
+    const [bankBal, setBankBal] = useState(null);
+    const curDate = new Date(date);
 
     const [incomes, setIncomes] = useState(defaultIncomes);
     const [expenses, setExpenses] = useState(defaultExpenses);
 
-    const [user, setUser] = useState(null);
     const [categories, setCategories] = useState(null);
-    const [date, setDate] = useState(Date.now());
     const [transactions, setTransaction] = useState(null);
 
     const [categoriesSnap] = useCollection(
         collection(db, `users/${user?.uid}/categories`)
     );
 
-    const curDate = new Date(date);
-
-    console.log(curDate.getMonth());
-
     const transactionQuery = getTransactionQuery(
         user?.uid,
         curDate.getMonth(),
         curDate.getFullYear()
     );
+    
     const [transactionsSnap] = useCollection(transactionQuery);
 
     const totalIncome = incomes.reduce((total, income) => total + income, 0);
@@ -49,18 +57,18 @@ export const ContextProvider = ({ children }) => {
 
     // -------------Functions--------------------
     const handleLogin = async () => {
-        const userData = await login();
-        setUser(userData);
+        const userID = await login();
+        setUid(userID);
 
-        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("user", JSON.stringify(userID));
     };
 
     const checkLoginData = () => {
-        let userData = localStorage.getItem("user");
-        userData = JSON.parse(userData);
+        let userID = localStorage.getItem("user");
+        userID = JSON.parse(userID);
 
-        if (userData) {
-            setUser(userData);
+        if (userID) {
+            setUid(userID);
         }
     };
     const totalBalance = totalIncome - totalExpenses;
@@ -90,6 +98,11 @@ export const ContextProvider = ({ children }) => {
         setTransaction(newTrans);
     }, [transactionsSnap]);
 
+    useEffect(() => {
+        setCashBal(user?.cashBal);
+        setBankBal(user?.bankBal);
+    }, [user]);
+
     // -----------------All print statements------------------
 
     useEffect(() => {
@@ -113,10 +126,15 @@ export const ContextProvider = ({ children }) => {
         totalExpenses,
         totalBalance,
         user,
+        bankBal,
+        cashBal,
+        uid,
         categories,
         transactions,
-        setUser,
+        setUid,
         active,
+        setBankBal,
+        setCashBal,
         setActive,
         handleLogin,
     };

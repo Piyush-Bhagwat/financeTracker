@@ -1,40 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import TransactionCard from "../components/TransactionCard";
 import { Link } from "react-router-dom";
 import "../assets/style/home.css";
 import { getAllIncome , getAllExpenses } from "../database/transaction.db";
+import { months } from "moment";
 
 const Home = () => {
   const {
     user,
     transactions,
-    totalIncome,
-    totalExpenses,
-    totalBalance,
     setActive,
+    uid
   } = useGlobalContext();
+  const [data, setData] = useState({
+    totalBalance : 0,
+    totalIncome : 0,
+    totalExpenses : 0,
+  });
    
-  const date = new Date();
-const month = date.getMonth();
-const year = date.getFullYear();
+  useEffect(()=>{
+    const fetchData = async() =>{
+       const income = await getAllIncome(uid , 2, 2024);
+       const expense = await getAllExpenses(uid, 2, 2024);
+       const total = user?.bankBal + user?.cashBal;
 
+       setData({
+        totalBalance : total ,
+        totalIncome : income,
+        totalExpenses : expense ,
+      });
+    }
+    fetchData();
+  })
 
   return (
     <div className="home">
       <span className="home-header">Welcome, {user?.name}</span>
       <div className="balance">
         <span>Available Balance</span>
-        <span>₹ {}</span>
+        <span>₹ { data.totalBalance}</span>
       </div>
       <div className="summary">
         <div className="income">
           <span>Income</span>
-          <span>₹ {getAllIncome(user.id , month , year)}</span>
+          <span>₹ {data.totalIncome}</span>
         </div>
         <div className="expenses">
           <span>Expenses</span>
-          <span>₹ {}</span>
+          <span>₹ { data.totalExpenses}</span>
         </div>
       </div>
       <div className="recent-transactions">
