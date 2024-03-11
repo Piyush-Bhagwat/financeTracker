@@ -3,7 +3,7 @@ import { useGlobalContext } from "../context/Context";
 import TransactionCard from "../components/TransactionCard";
 import { Link } from "react-router-dom";
 import "../assets/style/home.css";
-import {getAllExpense} from "../database/transaction.db"
+import { getAllIncome , getAllExpenses } from "../database/transaction.db";
 
 const Home = () => {
   const {
@@ -14,22 +14,27 @@ const Home = () => {
     totalBalance,
     setActive,
   } = useGlobalContext();
+   
+  const date = new Date();
+const month = date.getMonth();
+const year = date.getFullYear();
+
 
   return (
     <div className="home">
       <span className="home-header">Welcome, {user?.name}</span>
       <div className="balance">
         <span>Available Balance</span>
-        <span>₹ {totalBalance}</span>
+        <span>₹ {}</span>
       </div>
       <div className="summary">
         <div className="income">
           <span>Income</span>
-          <span>₹ {totalIncome}</span>
+          <span>₹ {getAllIncome(user.id , month , year)}</span>
         </div>
         <div className="expenses">
           <span>Expenses</span>
-          <span>₹ {totalExpenses}</span>
+          <span>₹ {}</span>
         </div>
       </div>
       <div className="recent-transactions">

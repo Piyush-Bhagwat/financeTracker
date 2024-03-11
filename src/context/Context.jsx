@@ -7,6 +7,7 @@ import {
 } from "react-firebase-hooks/firestore";
 import { collection, orderBy, query } from "firebase/firestore";
 import { db } from "../database/config.db";
+import { getTransactionQuery } from "../database/transaction.db";
 
 const defaultIncomes = [3000, 1000, 500];
 
@@ -22,16 +23,21 @@ export const ContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState(null);
-
+    const [date, setDate] = useState(Date.now());
     const [transactions, setTransaction] = useState(null);
 
     const [categoriesSnap] = useCollection(
         collection(db, `users/${user?.uid}/categories`)
     );
 
-    const transactionQuery = query(
-        collection(db, `users/${user?.uid}/transactions`),
-        orderBy("time", "desc")
+    const curDate = new Date(date);
+
+    console.log(curDate.getMonth());
+
+    const transactionQuery = getTransactionQuery(
+        user?.uid,
+        curDate.getMonth(),
+        curDate.getFullYear()
     );
     const [transactionsSnap] = useCollection(transactionQuery);
 
