@@ -1,9 +1,40 @@
 .transactions {
   padding: 3% 3%;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: auto;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
 
+.transaction-sort-container {
+  margin-bottom: 20px;
+}
+
+#transactionSort {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--secondary);
+  color: white;
+}
+
+#transactionSort:hover {
+  border-color: #007bff;
+}
+
+#transactionSort:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+}
+
+#transactionSort option {
+  background-color: #555;
+  color: #fff;
+}
+
+#transactionSort option:hover {
+  background-color: #007bff;
 }

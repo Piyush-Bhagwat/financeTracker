@@ -4,45 +4,56 @@ import "../assets/style/transactions.css";
 import { useGlobalContext } from "../context/Context";
 
 const Transactions = () => {
-    const { transactions } = useGlobalContext();
+  const { transactions } = useGlobalContext();
 
-    const getDate = (time) => {
-        const t = new Date(time);
+  const getDate = (time) => {
+    const t = new Date(time);
 
-        return `${t.getDate()}/${t.getMonth()+1}/${t.getFullYear()}`;
-    };
+    return `${t.getDate()}/${t.getMonth() + 1}/${t.getFullYear()}`;
+  };
 
-    const renderCards = () => {
-        let prevDate = "null";
-        return (
+  const renderCards = () => {
+    let prevDate = "null";
+    return (
+      <>
+        {transactions?.map((trans) => {
+          let curDate = getDate(trans.time);
+          let sameDate = prevDate === curDate;
+          console.log(trans.time, curDate);
+          if (!sameDate) {
+            prevDate = curDate;
+          }
+
+          return (
             <>
-                {transactions?.map((trans) => {
-                    let curDate = getDate(trans.time);
-                    let sameDate = prevDate === curDate;
-                    console.log(trans.time, curDate);
-                    if (!sameDate) {
-                        prevDate = curDate;
-                    }
-
-                    return (
-                        <>
-                            {!sameDate && <h3 className="date">{curDate}</h3>}
-                            <TransactionCard
-                                amount={trans.amount}
-                                key={trans.id}
-                                category={trans.category}
-                                type={trans.type}
-                                note={trans.note}
-                                time={trans.time}
-                                mode={trans.mode}
-                            />
-                        </>
-                    );
-                })}
+              {!sameDate && <h3 className="date">{curDate ? "Today" : curDate}</h3>}
+              <TransactionCard
+                amount={trans.amount}
+                key={trans.id}
+                category={trans.category}
+                type={trans.type}
+                note={trans.note}
+                time={trans.time}
+                mode={trans.mode}
+              />
             </>
-        );
-    };
-    return <div className="transactions">{renderCards()}</div>;
+          );
+        })}
+      </>
+    );
+  };
+  return (
+    <div className="transactions">
+      <div className="transaction-sort-container">
+        <select name="transaction-sort" id="transactionSort">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+      </div>
+      {renderCards()}
+    </div>
+  );
 };
 
 export default Transactions;
