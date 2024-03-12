@@ -4,7 +4,7 @@ import { addCategory } from "../database/user.db";
 import { useGlobalContext } from "../context/Context";
 
 const AddCategory = ({ setShowForm }) => {
-    const {user} = useGlobalContext();
+    const { user } = useGlobalContext();
     const [name, setName] = useState("");
     const [emoji, setEmoji] = useState("😵‍💫");
     const [color, setColor] = useState("#34ac5d");
@@ -16,11 +16,14 @@ const AddCategory = ({ setShowForm }) => {
     };
 
     const handleSubmit = async () => {
+        if (name == "" || name == " ") return;
+
         const data = {
             name,
             emoji,
             color,
         };
+
         await addCategory(user.uid, data);
 
         setName("");
