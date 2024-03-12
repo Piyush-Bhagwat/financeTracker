@@ -89,9 +89,6 @@ const AddTransaction = () => {
                     onChange={(e) => setTransactionCategory(e.target.value)}
                 >
                     {renderCatergories()}
-                    <option value="">
-                        <button>Add more</button>
-                    </option>
                 </select>
             </div>
             <div className="transaction-type">
