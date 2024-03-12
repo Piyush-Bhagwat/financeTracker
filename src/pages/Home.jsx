@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import TransactionCard from "../components/TransactionCard";
 import { Link } from "react-router-dom";
 import "../assets/style/home.css";
+import { getAllIncome, getAllExpenses } from "../database/transaction.db";
+import { months } from "moment";
 
 const Home = () => {
-  const { user, transactions, totalIncome, totalExpenses, totalBalance ,setActive } =
-    useGlobalContext();
+  const {
+    user,
+    transactions,
+    setActive,
+    totalIncome,
+    totalExpenses,
+    bankBal,
+    cashBal,
+  } = useGlobalContext();
 
+  const totalBalance = parseFloat(bankBal) + parseFloat(cashBal);
   return (
     <div className="home">
       <span className="home-header">Welcome, {user?.name}</span>

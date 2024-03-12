@@ -3,8 +3,10 @@ import "../assets/style/addtransaction.css";
 import Keypad from "../components/Keypad";
 import { useGlobalContext } from "../context/Context";
 import { addTransaction } from "../database/transaction.db";
+import { useNavigate } from "react-router-dom";
 
 const AddTransaction = () => {
+    const navigate = useNavigate();
     const { categories, user } = useGlobalContext();
     const [amount, setAmount] = useState("");
     const [comment, setComment] = useState("");
@@ -47,6 +49,8 @@ const AddTransaction = () => {
         // Reset the fields
         setAmount("");
         setComment("");
+        navigate("/");
+
     };
 
     const renderCatergories = () => {

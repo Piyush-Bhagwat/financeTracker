@@ -46,6 +46,7 @@ export const ContextProvider = ({ children }) => {
         curDate.getMonth(),
         curDate.getFullYear()
     );
+    
     const [transactionsSnap] = useCollection(transactionQuery);
 
     const totalIncome = incomes?.reduce(

@@ -15,15 +15,15 @@ const Wallet = () => {
     };
 
     useEffect(() => {
-        // Convert amount values to integers before performing addition
-        const total = parseInt(cashBal) + parseInt(bankBal);
+        // Convert amount values to Float before performing addition
+        const total = parseFloat(cashBal) + parseFloat(bankBal);
         setTotalAmt(total);
     }, [cashBal, bankBal]);
 
     return (
         <div className="wallet-container">
             <header className="wallet-header">
-                <h1>Wallets</h1>
+                <h1>Wallet</h1>
                 <h1>{`₹ ${totalAmt}`}</h1>
             </header>
 
