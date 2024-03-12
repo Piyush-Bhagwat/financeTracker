@@ -5,6 +5,7 @@
     border-radius: 10px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
     background-color: #31363f47;
+    margin-bottom: 10px;
     width: 100%;
   }
   
@@ -22,7 +23,7 @@
     aspect-ratio: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
   }
   
   .icon img {
@@ -33,25 +34,41 @@
   
   .details {
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   .up,
   .down {
     display: flex;
-    width: 100%;
+    max-width: 100%;
     justify-content: space-between;
+    padding-left: 0.3125rem; 
+    padding-right: 0.3125rem; 
   }
   
-  .up {
-    font-weight: 700;
-    font-size: 1.3em;
+  .cat {
+    font-size: 1.5rem; 
   }
   
-  .up .mode {
-    font-size: 0.6em;
-    font-weight: 200;
+  .note {
+    font-size: 1.25rem; 
   }
   
-  .down {
-    font-size: 0.8em;
+  .time,
+  .mode {
+    font-size: 1.125rem;
   }
+  
+  .amount {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  
+  .amt {
+    font-size: 2rem;
+  }
+  
