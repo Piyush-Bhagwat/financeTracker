@@ -3,6 +3,7 @@ import {
     doc,
     updateDoc,
     getDocs,
+    getDoc,
     addDoc,
 } from "@firebase/firestore";
 import { db } from "./config.db";
@@ -14,6 +15,23 @@ const setBalance = async (uid, balanceAmount, mode) => {
         mode === "cash"
             ? { cashBal: balanceAmount }
             : { bankBal: balanceAmount };
+
+    await updateDoc(colRef, toUpdate);
+    console.log("balance updated", toUpdate);
+};
+
+const addBalance = async (uid, balanceAmount, mode) => {
+    const colRef = doc(db, "users", uid);
+    const docSnap = await getDoc(colRef);
+    const bal = docSnap.data();
+
+    const prevBank = bal.bankBal;
+    const prevCash = bal.cashBal;
+
+    const toUpdate =
+        mode === "cash"
+            ? { cashBal: prevCash + balanceAmount }
+            : { bankBal: prevBank + balanceAmount };
 
     await updateDoc(colRef, toUpdate);
     console.log("balance updated", toUpdate);
@@ -42,4 +60,4 @@ const addCategory = async (uid, categoryData) => {
 
 
 
-export { setBalance, getCategories, addCategory};
+export { setBalance, addBalance, getCategories, addCategory};

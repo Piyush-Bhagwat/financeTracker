@@ -5,31 +5,17 @@ import { getAllIncome, getAllExpenses } from '../../database/transaction.db';
 import PieChart from './PieChart';
 
 function Chart() {
-  const { totalIncome, totalExpenses, user } = useGlobalContext();
+  const { incomes, expenses, totalIncome, totalExpenses, user, date, duration } = useGlobalContext();
   const [labels, setLabels] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState((new Date()).getMonth());
-
-  const [date, setDate] = useState(Date.now());
-  const curDate = new Date(date);
-
-  const [incomes, setIncomes] = useState([]);
-  const [expenses, setExpenses] = useState([]);
 
   const [previousIncome, setPreviousIncome] = useState(0);
   const [previousExpenses, setPreviousExpenses] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const currentMonth = selectedMonth + 1; 
-      const currentYear = curDate.getFullYear();
-      
-      const incomeData = await getAllIncome(user?.uid, currentMonth, currentYear);
-      console.log("Income data:", incomeData);
-      setIncomes(incomeData?.data);
-
-      const expenseData = await getAllExpenses(user?.uid, currentMonth, currentYear);
-      console.log("Expense data:", expenseData);
-      setExpenses(expenseData?.data);
+      const incomeData = await getAllIncome(uid, date, duration);
+            const expenseData = await getAllExpenses(uid, date, duration);
 
       const previousMonth = (currentMonth - 1 === 0) ? 12 : currentMonth - 1;
       const previousYear = (currentMonth - 1 === 0) ? currentYear - 1 : currentYear;
@@ -53,37 +39,47 @@ function Chart() {
     };
 
     fetchData();
-  }, [selectedMonth, user?.uid]);
+  }, [selectedMonth, user]);
 
   const handleMonthChange = (event) => {
     setSelectedMonth(parseInt(event.target.value));
   };
 
+  const reverseArray = (ar) => {
+        // const ar = [];
 
-  
-  const data = {
-    labels: labels, 
-    datasets: [
-      {
-        label: 'Income',
-        data: [previousIncome,0,totalIncome],
-        fill: true,
-        borderColor: 'green',
-        backgroundColor: 'rgba(0, 255, 0, 0.2)',
-        color: 'white',
-        tension: 0.4, 
-      },
-      {
-        label: 'Expenses',
-        data: [previousExpenses, 0,totalExpenses],
-        fill: true,
-        borderColor: 'red',
-        backgroundColor: 'rgba(255, 0, 0, 0.2)',
-        color: 'white',
-        tension: 0.4, 
-      },
-    ],
-  };
+        let newAr = ar
+            .slice()
+            .reverse()
+            .map((sth) => sth.amount);
+
+        // console.log("new ar", newAr)
+        return newAr;
+    };
+
+    const data = {
+        labels, // Example labels for months
+        datasets: [
+            {
+                label: "Income",
+                data: incomes ? reverseArray(incomes) : [],
+                fill: false,
+                borderColor: "green",
+                backgroundColor: "green",
+                color: "white",
+                tension: 0.3,
+            },
+            {
+                label: "Expenses",
+                data: expenses ? reverseArray(expenses) : [],
+                fill: false,
+                borderColor: "red",
+                backgroundColor: "red",
+                color: "white",
+                tension: 0.5,
+            },
+        ],
+    };
 
   const options = {
     plugins: {

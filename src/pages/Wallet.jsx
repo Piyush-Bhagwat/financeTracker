@@ -14,16 +14,20 @@ const Wallet = () => {
         setSelectedType(type);
     };
 
+    const onResetClick=()=>{
+        setBankBal(0);
+        setCashBal(0);
+    }
     useEffect(() => {
-        // Convert amount values to integers before performing addition
-        const total = parseInt(cashBal) + parseInt(bankBal);
+        // Convert amount values to Float before performing addition
+        const total = parseFloat(cashBal) + parseFloat(bankBal);
         setTotalAmt(total);
     }, [cashBal, bankBal]);
 
     return (
         <div className="wallet-container">
             <header className="wallet-header">
-                <h1>Wallets</h1>
+                <h1>Wallet</h1>
                 <h1>{`₹ ${totalAmt}`}</h1>
             </header>
 
@@ -52,6 +56,10 @@ const Wallet = () => {
                     </button>
                 </div>
             </div>
+
+            <button className="reset-btn" onClick={onResetClick}>
+                Reset
+            </button>
 
             {isModelOpen && (
                 <Model

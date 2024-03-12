@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import TransactionCard from "../components/TransactionCard";
 import { Link } from "react-router-dom";
 import "../assets/style/home.css";
+import { getAllIncome, getAllExpenses } from "../database/transaction.db";
+import { months } from "moment";
 
 const Home = () => {
-  const { user, transactions, totalIncome, totalExpenses, totalBalance ,setActive } =
-    useGlobalContext();
+  const {
+    user,
+    transactions,
+    setActive,
+    totalIncome,
+    totalExpenses,
+    bankBal,
+    cashBal,
+  } = useGlobalContext();
 
+  const totalBalance = parseFloat(bankBal) + parseFloat(cashBal);
   return (
     <div className="home">
       <span className="home-header">Welcome, {user?.name}</span>
@@ -26,11 +36,14 @@ const Home = () => {
         </div>
       </div>
       <div className="recent-transactions">
-        <span>Recent Transactions</span>
-        <Link to="/transactions" className="view-all" onClick={()=>setActive(1)}>
-          See All
-        </Link>
-        {transactions?.map((trans) => (
+
+        <div className="see-all">
+          <span>Recent Transactions</span>
+          <Link to="/transactions" className="sm-btn" onClick={()=>setActive(1)}>
+            See All
+          </Link>
+        </div>
+        {transactions?.slice(0, 3)?.map((trans) =>   //slice the array to limmit only 3 result 
           <TransactionCard
             key={trans.id}
             amount={trans.amount}
@@ -40,7 +53,7 @@ const Home = () => {
             time={trans.time}
             mode={trans.mode}
           />
-        ))}
+        )}
       </div>
     </div>
   );
