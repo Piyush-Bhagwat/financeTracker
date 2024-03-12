@@ -36,6 +36,8 @@ const getTransactions = async (uid) => {
 };
 
 const getTransactionQuery = (uid, month, year) => {
+    // const [startTimestamp, endTimestamp] = getStartAndEndDate(date, duration);
+
     const startTimestamp = new Date(year, month, 1);
     startTimestamp.setHours(0, 0, 0, 0);
 
@@ -52,6 +54,30 @@ const getTransactionQuery = (uid, month, year) => {
 
     return q;
 };
+
+function getStartAndEndDate(date, duration) {
+    let startDate, endDate;
+    const [year, month, day] = date.split("-").map(Number); // Assuming date is in format d/m/y
+
+    if (duration === "daily") {
+        startDate = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+        endDate = new Date(year, month - 1, day, 23, 59, 59, 999); // End of the day
+    } else if (duration === "weekly") {
+        const selectedDate = new Date(year, month - 1, day);
+        const dayOfWeek = selectedDate.getDay(); // 0 (Sunday) to 6 (Saturday)
+        const diff =
+            selectedDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Start of the week
+        startDate = new Date(selectedDate.setDate(diff));
+        endDate = new Date(selectedDate.setDate(diff + 6)); // End of the week
+        endDate.setHours(23, 59, 59, 999); // End of the day
+    } else if (duration === "monthly") {
+        startDate = new Date(year, month - 1, 1); // First day of the month
+        endDate = new Date(year, month, 0); // Last day of the month
+        endDate.setHours(23, 59, 59, 999); // End of the day
+    }
+
+    return [startDate.getTime(), endDate.getTime()];
+}
 
 const getAllExpenses = async (uid, month, year) => {
     const q = getTransactionQuery(uid, month, year);

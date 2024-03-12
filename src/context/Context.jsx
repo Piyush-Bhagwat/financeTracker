@@ -27,6 +27,7 @@ export const ContextProvider = ({ children }) => {
     const [uid, setUid] = useState(null);
     const [user] = useDocumentData(doc(db, `users/${uid}`)); //it will get realtime changes from balances
     const [date, setDate] = useState(new Date());
+    const [duration, setDuration] = useState("monthly");
     const [cashBal, setCashBal] = useState(null);
     const [bankBal, setBankBal] = useState(null);
 
@@ -181,6 +182,8 @@ export const ContextProvider = ({ children }) => {
         uid,
         categories,
         transactions,
+        duration,
+        setDuration,
         getStartAndEndDate,
         setUid,
         active,
