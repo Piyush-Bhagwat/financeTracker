@@ -36,29 +36,23 @@ const Home = () => {
         </div>
       </div>
       <div className="recent-transactions">
-        <div className="recent-header">
+
+        <div className="see-all">
           <span>Recent Transactions</span>
-          <Link
-            to="/transactions"
-            className="view-all"
-            onClick={() => setActive(1)}
-          >
+          <Link to="/transactions" className="sm-btn" onClick={()=>setActive(1)}>
             See All
           </Link>
         </div>
-
-        {transactions?.map((trans, index) =>
-          index < 3 ? (
-            <TransactionCard
-              key={trans.id}
-              amount={trans.amount}
-              category={trans.category}
-              type={trans.type}
-              note={trans.note}
-              time={trans.time}
-              mode={trans.mode}
-            />
-          ) : null
+        {transactions?.slice(0, 3)?.map((trans) =>   //slice the array to limmit only 3 result 
+          <TransactionCard
+            key={trans.id}
+            amount={trans.amount}
+            category={trans.category}
+            type={trans.type}
+            note={trans.note}
+            time={trans.time}
+            mode={trans.mode}
+          />
         )}
       </div>
     </div>

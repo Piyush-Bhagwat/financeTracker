@@ -33,7 +33,7 @@ const AddTransaction = () => {
     const handleSubmit = async () => {
         // Submit the expense data
         const data = {
-            amount,
+            amount: parseFloat(amount),
             mode: paymentMode,
             note: comment,
             type: transactionType,

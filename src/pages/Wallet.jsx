@@ -15,8 +15,8 @@ const Wallet = () => {
     };
 
     useEffect(() => {
-        // Convert amount values to integers before performing addition
-        const total = parseInt(cashBal) + parseInt(bankBal);
+        // Convert amount values to Float before performing addition
+        const total = parseFloat(cashBal) + parseFloat(bankBal);
         setTotalAmt(total);
     }, [cashBal, bankBal]);
 

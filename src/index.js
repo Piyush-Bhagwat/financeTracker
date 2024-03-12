@@ -13,6 +13,7 @@ import Transactions from "./pages/Transactions";
 import AddTransaction from "./pages/AddTransaction";
 import Wallet from "./pages/Wallet";
 import Error from "./pages/Error";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
             { path: "add-transaction", element: <AddTransaction /> },
             { path: "charts", element: <Charts /> },
             { path: "wallet", element: <Wallet /> },
+            {path: "profile", element: <Profile />},
         ],
     },
 ]);

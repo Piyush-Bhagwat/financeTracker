@@ -21,7 +21,7 @@ import {
 } from "../database/transaction.db";
 
 const chartContext = createContext();
-
+let uid; 
 export const ContextProvider = ({ children }) => {
     const [active, setActive] = useState();
     const [uid, setUid] = useState(null);
@@ -94,7 +94,7 @@ export const ContextProvider = ({ children }) => {
 
         setExpenses(incoms?.data);
     };
-    const totalBalance = totalIncome - totalExpenses;
+    const totalBalance = cashBal + bankBal;
 
     //---------------------on Page Load-----------------------
     useEffect(() => {
@@ -172,3 +172,5 @@ export const ContextProvider = ({ children }) => {
 export const useGlobalContext = () => {
     return useContext(chartContext);
 };
+
+export { uid };

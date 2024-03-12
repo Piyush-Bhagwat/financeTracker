@@ -20,9 +20,9 @@ const Model = ({ whereTo, amount, setAmount, setIsModelOpen }) => {
     };
 
     const handleSubmit = async () => {
-        setAmount(amt);
+        setAmount(parseFloat(amt));
         console.log(amt);
-        await setBalance(user.uid, amt, whereTo);
+        await setBalance(user.uid, parseFloat(amt), whereTo);
         setIsModelOpen(false);
     };
 
