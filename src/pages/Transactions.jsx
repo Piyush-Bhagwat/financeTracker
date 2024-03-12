@@ -3,6 +3,7 @@ import TransactionCard from "../components/TransactionCard";
 import "../assets/style/transactions.css";
 import { useGlobalContext } from "../context/Context";
 import DatePicker from "../components/DatePicker";
+import TimePicker from 'react-time-picker'
 
 const Transactions = () => {
     const { transactions, duration, setDuration } = useGlobalContext();
@@ -59,6 +60,7 @@ const Transactions = () => {
                 </select>
 
                 <DatePicker />
+
             </div>
             {renderCards()}
         </div>
