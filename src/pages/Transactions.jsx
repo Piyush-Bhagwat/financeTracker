@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import "../assets/style/transactions.css";
 import { useGlobalContext } from "../context/Context";
+import DatePicker from "../components/DatePicker";
 
 const Transactions = () => {
   const { transactions } = useGlobalContext();
-
+  const [ startdate, setStartDate ] = useState(new Date());
   const getDate = (time) => {
     const t = new Date(time);
 
@@ -49,6 +50,7 @@ const Transactions = () => {
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
         </select>
+        <DatePicker/>
       </div>
       {renderCards()}
     </div>

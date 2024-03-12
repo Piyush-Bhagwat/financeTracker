@@ -9,6 +9,9 @@
 
 .transaction-sort-container {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 #transactionSort {
@@ -38,3 +41,4 @@
 #transactionSort option:hover {
   background-color: #007bff;
 }
+
