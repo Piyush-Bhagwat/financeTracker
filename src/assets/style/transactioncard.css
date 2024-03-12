@@ -1,70 +1,57 @@
 .transaction-card {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-    background-color: #31363f47;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  
-  .transaction-card:not(:last-child) {
-    margin-bottom: 8px;
-  }
-  
-  .icon {
-    margin-right: 13px;
-    background: rgb(158, 22, 22);
-    border-radius: 10px;
-    box-shadow: 2px 2px 3px #00000052;
-    font-size: 2em;
-    width: 18%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-  }
-  
-  .icon img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
-  
-  .details {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .up,
-  .down {
-    display: flex;
-    max-width: 100%;
-    justify-content: space-between;
-    padding-left:5px;
-    padding-right:5px;
-  }
-  .cat{
-    font-size: x-large;
-  }
- .note{
-    font-size: larger;
- }
-  .time,
-  .mode{
-    font-size:large;
-  }
-  
-  .amount{
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #31363f47;
+  width: 100%;
+}
 
-  .amt{
-    font-size: xx-large;
-  }
+.transaction-card:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.icon {
+  margin-right: 13px;
+  background: rgb(158, 22, 22);
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px #00000052;
+  font-size: 2em;
+  width: 18%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.details {
+  width: 100%;
+}
+
+.up,
+.down {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.up {
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+.up .mode {
+  font-size: 0.6em;
+  font-weight: 200;
+}
+
+.down {
+  font-size: 0.8em;
+}
