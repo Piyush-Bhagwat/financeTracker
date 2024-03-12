@@ -19,7 +19,15 @@ const AddTransaction = () => {
     const [transactionType, setTransactionType] = useState("expense");
 
     const [time, setTime] = useState(
-        `${new Date().getHours()}:${new Date().getMinutes()}`
+        `${
+            new Date().getHours() < 9
+                ? "0" + new Date().getHours()
+                : new Date().getHours()
+        }:${
+            new Date().getMinutes() < 0
+                ? "0" + new Date().getMinutes()
+                : new Date().getMinutes()
+        }`
     );
 
     const handleNumberClick = (value) => {
@@ -46,6 +54,7 @@ const AddTransaction = () => {
         t.setHours(hour);
         t.setMinutes(min);
 
+        console.log(time);
         const data = {
             amount: parseFloat(amount),
             mode: paymentMode,
@@ -55,13 +64,12 @@ const AddTransaction = () => {
             category: transactionCategory,
         };
 
-        await addTransaction(user?.uid, data);
-        console.log(`added a transaction`);
+        // await addTransaction(user?.uid, data);
+        console.log(`added a transaction`, data);
 
         // Reset the fields
         setAmount("");
         setComment("");
-        navigate("/transactions");
     };
 
     const renderCatergories = () => {
@@ -110,8 +118,6 @@ const AddTransaction = () => {
                 >
                     {renderCatergories()}
                 </select>
-            </div>
-            <div className="second-row">
                 <div className="transaction-type">
                     <select
                         className="type-dropdown"
@@ -122,6 +128,8 @@ const AddTransaction = () => {
                         <option value="income">Income</option>
                     </select>
                 </div>
+            </div>
+            <div className="second-row">
                 <DatePicker />
 
                 <input

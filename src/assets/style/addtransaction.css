@@ -18,7 +18,11 @@
 }
 
 .time-picker{
-  color: #000;
+  color: #FFF;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--secondary);
 }
 
 @media (max-width: 768px) {
@@ -33,6 +37,7 @@
   justify-content: space-around;
   gap: 10px;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .transaction-dropdown,
@@ -42,11 +47,11 @@
   padding: 5px;
   border-radius: 10px;
   font-size: 13px;
-  width: 150px;
+  width: 25%;
   outline: none;
 }
 
-.category-dropdown {
+.category-dropdown { 
   background-color: #517250;
 }
 
@@ -69,7 +74,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .type-dropdown {
