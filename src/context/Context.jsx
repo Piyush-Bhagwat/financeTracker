@@ -93,7 +93,7 @@ export const ContextProvider = ({ children }) => {
 
         setExpenses(incoms?.data);
     };
-    const totalBalance = totalIncome - totalExpenses;
+    const totalBalance = cashBal + bankBal;
 
     //---------------------on Page Load-----------------------
     useEffect(() => {

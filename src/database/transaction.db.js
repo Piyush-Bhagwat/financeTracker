@@ -7,11 +7,18 @@ import {
     orderBy,
 } from "@firebase/firestore";
 import { db } from "./config.db";
+import { addBalance } from "./user.db";
 
 const addTransaction = async (uid, transactionData) => {
     const colRef = collection(db, `users/${uid}/transactions`);
 
     await addDoc(colRef, transactionData);
+
+    if (transactionData.type == "income") {
+        addBalance(uid, transactionData.amount, transactionData.mode);
+    } else {
+        addBalance(uid, -transactionData.amount, transactionData.mode);
+    }
     console.log("transactionData inserted");
 };
 
