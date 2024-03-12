@@ -29,9 +29,8 @@ const getTransactions = async (query) => {
     const transactions = [];
 
     transactionsSnapShot.forEach((doc) => {
-        transactions.push({ id: doc.id, ...doc.data() });
+        transactions.push({ id: doc.id, ...doc.data().amount, ...doc.data() });
     });
-
     return transactions;
 };
 
@@ -84,7 +83,7 @@ const getAllExpenses = async (uid, date, duration) => {
     const data = [];
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "expense") {
-            data.push({ id: doc.id, ...doc.data() });
+            data.push({ id: doc.id, ...doc.data() , month, year});
             expense += parseFloat(doc.data().amount);
         }
     });
@@ -96,17 +95,17 @@ const getAllIncome = async (uid, date, duration) => {
     
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
-
+    console.log("Income documents snapshot:", docSnapshot);
     let income = 0;
     const data = [];
 
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "income") {
-            data.push({ id: doc.id, ...doc.data() });
+            data.push({ id: doc.id, ...doc.data(), month, year });
             income += parseFloat(doc.data().amount);
         }
     });
-
+    console.log('heiii',{ total: income, data })
     return { total: income, data };
 };
 

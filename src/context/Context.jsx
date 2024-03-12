@@ -76,7 +76,6 @@ export const ContextProvider = ({ children }) => {
     const fetchData = async () => {
         const incoms = await getAllIncome(user?.uid, date, duration);
         setIncomes(incoms?.data);
-
         const expensesData = await getAllExpenses(user?.uid, date, duration);
         setExpenses(expensesData?.data);
 
