@@ -9,23 +9,23 @@ const Transactions = () => {
   const getDate = (time) => {
     const t = new Date(time);
 
-        return `${t.getDate()}/${t.getMonth() + 1}/${t.getFullYear()}`;
-    };
+    return `${t.getDate()}/${t.getMonth() + 1}/${t.getFullYear()}`;
+  };
 
-    const renderCards = () => {
-        let prevDate = "null";
-        return (
-            <>
-                {transactions?.map((trans) => {
-                    let curDate = getDate(trans.time);
-                    let sameDate = prevDate === curDate;
-                    if (!sameDate) {
-                        prevDate = curDate;
-                    }
+  const renderCards = () => {
+    let prevDate = "null";
+    return (
+      <>
+        {transactions?.map((trans) => {
+          let curDate = getDate(trans.time);
+          let sameDate = prevDate === curDate;
+          if (!sameDate) {
+            prevDate = curDate;
+          }
 
           return (
             <>
-              {!sameDate && <h3 className="date">{curDate ? "Today" : curDate}</h3>}
+              {!sameDate && <h3 className="date">{curDate}</h3>}
               <TransactionCard
                 amount={trans.amount}
                 key={trans.id}

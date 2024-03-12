@@ -72,11 +72,20 @@
   margin-top: 40px;
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .recent-transactions h3 {
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+.recent-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .view-all {
@@ -99,10 +108,11 @@
 
 /* TransactionCard component styles */
 .transaction-card {
+  width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .transaction-card .amount {
