@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-#transactionSort {
+.transactionSort {
   padding: 8px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -24,22 +24,22 @@
   color: white;
 }
 
-#transactionSort:hover {
+.transactionSort:hover {
   border-color: #007bff;
 }
 
-#transactionSort:focus {
+.transactionSort:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
 }
 
-#transactionSort option {
+.transactionSort option {
   background-color: #555;
   color: #fff;
 }
 
-#transactionSort option:hover {
+.transactionSort option:hover {
   background-color: #007bff;
 }
 

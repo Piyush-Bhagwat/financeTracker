@@ -52,10 +52,11 @@ const Transactions = () => {
       <div className="transaction-sort-container">
         <select
           name="transaction-sort"
-          id="transactionSort"
+          className="transactionSort"
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
         >
+          <option value="all">All</option>
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
@@ -63,21 +64,21 @@ const Transactions = () => {
 
         <select
           name="mode-sort"
-          id="transactionSort"
+          className="transactionSort"
           defaultValue="all"
           value={mode}
           onChange={(e) => setMode(e.target.value)}
         >
+          <option value="all">All</option>
           <option value="cash">Cash</option>
           <option value="card">Card</option>
           <option value="upi">UPI</option>
           <option value="netbanking">Netbanking</option>
-          <option value="all">All</option>
         </select>
 
         <select
           name="mode-sort"
-          id="transactionSort"
+          className="transactionSort"
           defaultValue="all"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -91,10 +92,9 @@ const Transactions = () => {
             );
           })}
         </select>
-
         <select
           name="transaction-sort"
-          id="transactionSort"
+          className="transactionSort"
           value={type}
           onChange={(e) => setType(e.target.value)}
         >
