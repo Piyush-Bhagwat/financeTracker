@@ -1,4 +1,4 @@
-.transactions{
+.transactions {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -8,38 +8,34 @@
   justify-content: center;
 }
 
-.transaction-sort-container {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.transactionSort {
-  padding: 8px 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: var(--secondary);
-  color: white;
-}
-
-.transactionSort:hover {
-  border-color: #007bff;
-}
-
-.transactionSort:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
-}
-
-.transactionSort option {
-  background-color: #555;
+.filter-button {
+  background-color: #333;
   color: #fff;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.transactionSort option:hover {
-  background-color: #007bff;
+.filter-button:hover {
+  background-color: #555;
 }
 
+.filter-button:focus {
+  outline: none;
+}
+
+.filter-button svg {
+  fill: #fff;
+  margin: 5px;
+  font-size: 1.5rem;
+}
+
+.btn-div{
+ display: flex;
+ justify-content: left;
+ width: 100%;
+ padding: 10px;
+}

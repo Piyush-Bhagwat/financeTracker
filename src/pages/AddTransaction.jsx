@@ -39,6 +39,10 @@ const AddTransaction = () => {
     };
 
     const handleSubmit = async () => {
+        if(amount === ""){
+            alert("Paise kon dalega !!");
+            return;
+        }
         // Submit the expense data
         const t = new Date(date?.getTime());
         const [hour, min] = time.split(":").map(Number);
