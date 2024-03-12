@@ -16,7 +16,7 @@ function App() {
                 <Login />
             ) : (
                 <>
-                    <main>
+                    <main className="main">
                         <Outlet />
                     </main>
                     <div className="bottom-filling"></div>

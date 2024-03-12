@@ -42,6 +42,9 @@ const Profile = () => {
         <span className="display-name">{user?.name}</span>
         <span className="username">{user?.email}</span>
       </div>
+      <button className="logout-btn" onClick={handleLogout}>
+        Logout
+      </button>
 
       <h3>All Categories</h3>
       <div className="categories">
@@ -56,11 +59,6 @@ const Profile = () => {
           </button>
         )}
       </div>
-
-      <h3>Logout</h3>
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
-      </button>
 
       {showForm && <AddCategory setShowForm={setShowForm} />}
     </div>

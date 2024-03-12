@@ -49,7 +49,7 @@ const AddTransaction = () => {
         // Reset the fields
         setAmount("");
         setComment("");
-        navigate("/");
+        navigate("/transactions");
 
     };
 
