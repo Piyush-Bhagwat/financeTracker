@@ -4,10 +4,12 @@ import Keypad from "../components/Keypad";
 import { useGlobalContext } from "../context/Context";
 import { addTransaction } from "../database/transaction.db";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "../components/DatePicker";
+import TimePicker from "react-time-picker";
 
 const AddTransaction = () => {
     const navigate = useNavigate();
-    const { categories, user } = useGlobalContext();
+    const { categories, user, date } = useGlobalContext();
     const [amount, setAmount] = useState("");
     const [comment, setComment] = useState("");
     const [paymentMode, setPaymentMode] = useState("cash");
@@ -15,6 +17,10 @@ const AddTransaction = () => {
         categories?.at(0)?.id
     );
     const [transactionType, setTransactionType] = useState("expense");
+
+    const [time, setTime] = useState(
+        `${new Date().getHours()}:${new Date().getMinutes()}`
+    );
 
     const handleNumberClick = (value) => {
         setAmount(amount + value);
@@ -34,12 +40,18 @@ const AddTransaction = () => {
 
     const handleSubmit = async () => {
         // Submit the expense data
+        const t = new Date(date?.getTime());
+        const [hour, min] = time.split(":").map(Number);
+
+        t.setHours(hour);
+        t.setMinutes(min);
+
         const data = {
             amount: parseFloat(amount),
             mode: paymentMode,
             note: comment,
             type: transactionType,
-            time: Date.now(),
+            time: t.getTime(),
             category: transactionCategory,
         };
 
@@ -50,7 +62,6 @@ const AddTransaction = () => {
         setAmount("");
         setComment("");
         navigate("/transactions");
-
     };
 
     const renderCatergories = () => {
@@ -70,6 +81,11 @@ const AddTransaction = () => {
     const getColor = () => {
         const obj = categories?.find((cat) => cat.id == transactionCategory);
         return obj?.color;
+    };
+
+    const handleTimeChange = (e) => {
+        // console.log(e.target.value);
+        setTime(e.target.value);
     };
 
     return (
@@ -95,15 +111,25 @@ const AddTransaction = () => {
                     {renderCatergories()}
                 </select>
             </div>
-            <div className="transaction-type">
-                <select
-                    className="type-dropdown"
-                    value={transactionType}
-                    onChange={(e) => setTransactionType(e.target.value)}
-                >
-                    <option value="expense">Expense</option>
-                    <option value="income">Income</option>
-                </select>
+            <div className="second-row">
+                <div className="transaction-type">
+                    <select
+                        className="type-dropdown"
+                        value={transactionType}
+                        onChange={(e) => setTransactionType(e.target.value)}
+                    >
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                </div>
+                <DatePicker />
+
+                <input
+                    type="time"
+                    value={time}
+                    className="time-picker"
+                    onChange={handleTimeChange}
+                />
             </div>
             <div className="amount-entry">
                 <input
