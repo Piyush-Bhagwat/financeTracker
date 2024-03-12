@@ -43,32 +43,28 @@
     display: flex;
     max-width: 100%;
     justify-content: space-between;
-    padding-left: 0.3125rem; 
-    padding-right: 0.3125rem; 
+    padding-left:5px;
+    padding-right:5px;
   }
-  
-  .cat {
-    font-size: 1.5rem; 
+  .cat{
+    font-size: x-large;
   }
-  
-  .note {
-    font-size: 1.25rem; 
-  }
-  
+ .note{
+    font-size: larger;
+ }
   .time,
-  .mode {
-    font-size: 1.125rem;
+  .mode{
+    font-size:large;
   }
   
-  .amount {
-    width: 30%;
+  .amount{
+    width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
   }
-  
-  .amt {
-    font-size: 2rem;
+
+  .amt{
+    font-size: xx-large;
   }
-  

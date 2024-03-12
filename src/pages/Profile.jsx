@@ -40,7 +40,7 @@ const Profile = () => {
       <div className="user-profile">
         <img src={`${user?.photoURL}`} alt="profile" />
         <span className="display-name">{user?.name}</span>
-        <span className="username">@{user?.email}</span>
+        <span className="username">{user?.email}</span>
       </div>
       <button className="logout-btn" onClick={handleLogout}>
         Logout
