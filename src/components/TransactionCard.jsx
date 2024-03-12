@@ -1,17 +1,17 @@
 import React from "react";
-import "../assets/style/transactionCard.css";
+import "../assets/style/transactioncard.css";
 import { useGlobalContext } from "../context/Context";
 
 const TransactionCard = ({ type, mode, category, amount, note, time }) => {
-  const { categories } = useGlobalContext();
-  let color, emoji, categoryName;
+    const { categories } = useGlobalContext();
+    let color, emoji, categoryName;
 
-  const readCategory = () => {
-    const cat = categories?.find((cat) => cat.id === category);
-    categoryName = cat?.name;
-    emoji = cat?.emoji;
-    color = cat?.color;
-  };
+    const readCategory = () => {
+        const cat = categories?.find((cat) => cat.id === category);
+        categoryName = cat?.name;
+        emoji = cat?.emoji;
+        color = cat?.color;
+    };
 
     const getTime = () => {
         const date = new Date(time);
@@ -22,19 +22,19 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
         } ${hour >= 12 ? "pm" : "am"}`;
     };
 
-  getTime();
-  readCategory();
+    getTime();
+    readCategory();
 
-  return (
-    <div className="transaction-card">
-      <div
-        className="icon"
-        style={{
-          backgroundColor: type === "income" ? "#2a8c2a" : color,
-        }}
-      >
-        {type === "income" ? "🤑" : emoji}
-      </div>
+    return (
+        <div className="transaction-card">
+            <div
+                className="icon"
+                style={{
+                    backgroundColor: type === "income" ? "#2a8c2a" : color,
+                }}
+            >
+                {type === "income" ? "🤑" : emoji}
+            </div>
 
             <div className="details">
                 <div className="up">
