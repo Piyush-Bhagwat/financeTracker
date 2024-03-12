@@ -3,14 +3,12 @@ import "../assets/style/datepicker.css";
 import { useGlobalContext } from "../context/Context";
 
 const DatePicker = () => {
-    const { setDate } = useGlobalContext();
-    const [selectedDate, setSelectedDate] = useState(null);
+    const { setDate, date } = useGlobalContext();
 
     const handleDateChange = (event) => {
         const dateValue = event.target.value;
         const d = new Date(dateValue);
         setDate(d);
-        setSelectedDate(new Date(dateValue));
     };
 
     return (
@@ -21,8 +19,8 @@ const DatePicker = () => {
                     name="date-picker"
                     id="date-picker"
                     value={
-                        selectedDate
-                            ? selectedDate.toISOString().split("T")[0]
+                        date
+                            ? date.toISOString().split("T")[0]
                             : ""
                     }
                     onChange={handleDateChange}

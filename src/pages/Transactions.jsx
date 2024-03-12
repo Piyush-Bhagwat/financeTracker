@@ -53,7 +53,6 @@ const Transactions = () => {
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
                 >
-                    <option value="select">Select</option>
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>

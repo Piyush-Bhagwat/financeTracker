@@ -2,9 +2,9 @@ import React , {useEffect, useState} from 'react';
 import { Line } from 'react-chartjs-2';
 import { useGlobalContext } from '../../context/Context';
 import { getAllIncome, getAllExpenses } from '../../database/transaction.db';
-import { uid } from '../../context/Context'
+
 function Chart() {
-  const { incomes, expenses, user } = useGlobalContext();
+  const { incomes, uid, expenses, user } = useGlobalContext();
   const [labels, setLabels] = useState([]);
   
 
