@@ -21,15 +21,14 @@ import {
 } from "../database/transaction.db";
 
 const chartContext = createContext();
-let uid; 
+let uid;
 export const ContextProvider = ({ children }) => {
-    const [active, setActive] = useState();
+    const [active, setActive] = useState(1);
     const [uid, setUid] = useState(null);
     const [user] = useDocumentData(doc(db, `users/${uid}`)); //it will get realtime changes from balances
-    const [date, setDate] = useState(Date.now());
+    const [date, setDate] = useState(new Date());
     const [cashBal, setCashBal] = useState(null);
     const [bankBal, setBankBal] = useState(null);
-    const curDate = new Date(date);
 
     const [incomes, setIncomes] = useState(null);
     const [expenses, setExpenses] = useState(null);
@@ -43,10 +42,10 @@ export const ContextProvider = ({ children }) => {
 
     const transactionQuery = getTransactionQuery(
         user?.uid,
-        curDate.getMonth(),
-        curDate.getFullYear()
+        date.getMonth(),
+        date.getFullYear()
     );
-    
+
     const [transactionsSnap] = useCollection(transactionQuery);
 
     const totalIncome = incomes?.reduce(
@@ -78,8 +77,8 @@ export const ContextProvider = ({ children }) => {
     const getIncome = async () => {
         const incoms = await getAllIncome(
             user?.uid,
-            curDate.getMonth(),
-            curDate.getFullYear()
+            date.getMonth(),
+            date.getFullYear()
         );
 
         setIncomes(incoms?.data);
@@ -88,13 +87,37 @@ export const ContextProvider = ({ children }) => {
     const getExpence = async () => {
         const incoms = await getAllExpenses(
             user?.uid,
-            curDate.getMonth(),
-            curDate.getFullYear()
+            date.getMonth(),
+            date.getFullYear()
         );
 
         setExpenses(incoms?.data);
     };
     const totalBalance = cashBal + bankBal;
+
+    function getStartAndEndDate(date, duration) {
+        let startDate, endDate;
+        const [year, month, day] = date.split("-").map(Number); // Assuming date is in format d/m/y
+
+        if (duration === "daily") {
+            startDate = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+            endDate = new Date(year, month - 1, day, 23, 59, 59, 999); // End of the day
+        } else if (duration === "weekly") {
+            const selectedDate = new Date(year, month - 1, day);
+            const dayOfWeek = selectedDate.getDay(); // 0 (Sunday) to 6 (Saturday)
+            const diff =
+                selectedDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Start of the week
+            startDate = new Date(selectedDate.setDate(diff));
+            endDate = new Date(selectedDate.setDate(diff + 6)); // End of the week
+            endDate.setHours(23, 59, 59, 999); // End of the day
+        } else if (duration === "monthly") {
+            startDate = new Date(year, month - 1, 1); // First day of the month
+            endDate = new Date(year, month, 0); // Last day of the month
+            endDate.setHours(23, 59, 59, 999); // End of the day
+        }
+
+        return [startDate.getTime(), endDate.getTime()];
+    }
 
     //---------------------on Page Load-----------------------
     useEffect(() => {
@@ -115,8 +138,6 @@ export const ContextProvider = ({ children }) => {
         const newTrans = transactionsSnap?.docs?.map((cat) => {
             return { id: cat.id, ...cat.data() };
         });
-
-        // console.log(transactionsSnap);
 
         setTransaction(newTrans);
     }, [transactionsSnap]);
@@ -142,6 +163,10 @@ export const ContextProvider = ({ children }) => {
         if (transactions) console.log("Transactions Update", transactions);
     }, [transactions]);
 
+    useEffect(() => {
+        setDate(new Date());
+    }, [active]);
+
     const value = {
         incomes,
         setIncomes,
@@ -156,8 +181,11 @@ export const ContextProvider = ({ children }) => {
         uid,
         categories,
         transactions,
+        getStartAndEndDate,
         setUid,
         active,
+        date,
+        setDate,
         setBankBal,
         setCashBal,
         setActive,

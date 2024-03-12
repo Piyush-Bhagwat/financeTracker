@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/style/transactionCard.css";
+import "../assets/style/transactioncard.css";
 import { useGlobalContext } from "../context/Context";
 
 const TransactionCard = ({ type, mode, category, amount, note, time }) => {
@@ -17,7 +17,9 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
         const date = new Date(time);
         const hour = date.getHours();
         const min = date.getMinutes();
-        time = `${hour % 12 !== 0 ? hour % 12 : "12"}:${min < 10 ? "0" + min : min} ${hour >= 12 ? "pm" : "am"}`;
+        time = `${hour % 12 !== 0 ? hour % 12 : "12"}:${
+            min < 10 ? "0" + min : min
+        } ${hour >= 12 ? "pm" : "am"}`;
     };
 
     getTime();
@@ -43,7 +45,8 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
                         <span className="mode">{mode}</span>
                         <span
                             style={{
-                                color: type === "income" ? "#2a8c2a" : "#e94040",
+                                color:
+                                    type === "income" ? "#2a8c2a" : "#e94040",
                             }}
                         >
                             {`${type === "income" ? "+" : "-"}${amount}`}

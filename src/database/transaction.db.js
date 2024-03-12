@@ -32,7 +32,6 @@ const getTransactions = async (uid) => {
         transactions.push({ id: doc.id, ...doc.data() });
     });
 
-    console.log(transactions);
     return transactions;
 };
 
@@ -57,7 +56,6 @@ const getTransactionQuery = (uid, month, year) => {
 const getAllExpenses = async (uid, month, year) => {
     const q = getTransactionQuery(uid, month, year);
     const docSnapshot = (await getDocs(q)).docs;
-    console.log("snap", docSnapshot);
 
     let expense = 0;
     const data = [];
