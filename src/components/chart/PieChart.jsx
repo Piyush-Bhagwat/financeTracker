@@ -37,7 +37,7 @@ function PieChart() {
         } else {
             console.log("User ID is not available.");
         }
-    }, [user]);
+    }, [user, transactions, categories]);
 
     const calculateCategoryAmount = (categoryName, transactions) => {
         return transactions.reduce((total, transaction) => {
