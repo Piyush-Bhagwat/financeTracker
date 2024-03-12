@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../assets/style/header.css";
-import { logout } from "../database/auth.db";
 import { useGlobalContext } from "../context/Context";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
@@ -13,12 +12,6 @@ const Header = () => {
         setShowDropdown((p) => !p);
     };
 
-    const handleLogout = () => {
-        logout();
-        setUid(null);
-        localStorage.removeItem("user");
-        console.log("Logout clicked");
-    };
     const currentRoute = window.location.pathname.substring(1);
     useEffect(() => {
         if (currentRoute === "") {
