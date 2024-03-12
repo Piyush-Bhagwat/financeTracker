@@ -22,9 +22,9 @@ const addTransaction = async (uid, transactionData) => {
     console.log("transactionData inserted");
 };
 
-const getTransactions = async (uid) => {
-    const colRef = collection(db, `users/${uid}/transactions`);
-    const transactionsSnapShot = await getDocs(colRef);
+const getTransactions = async (query) => {
+    // const colRef = collection(db, `users/${uid}/transactions`);
+    const transactionsSnapShot = await getDocs(query);
 
     const transactions = [];
 
@@ -35,20 +35,14 @@ const getTransactions = async (uid) => {
     return transactions;
 };
 
-const getTransactionQuery = (uid, month, year) => {
-    // const [startTimestamp, endTimestamp] = getStartAndEndDate(date, duration);
-
-    const startTimestamp = new Date(year, month, 1);
-    startTimestamp.setHours(0, 0, 0, 0);
-
-    const endTimestamp = new Date(year, month + 1, 0); // Get last day of previous month
-    endTimestamp.setHours(23, 59, 59, 999);
+const getTransactionQuery = (uid, date, duration) => {
+    const [startTimestamp, endTimestamp] = getStartAndEndDate(date, duration);
 
     const transactionsRef = collection(db, `users/${uid}/transactions`);
     const q = query(
         transactionsRef,
-        where("time", ">=", startTimestamp.getTime()),
-        where("time", "<=", endTimestamp.getTime()),
+        where("time", ">=", startTimestamp),
+        where("time", "<=", endTimestamp),
         orderBy("time", "desc")
     );
 
@@ -57,7 +51,10 @@ const getTransactionQuery = (uid, month, year) => {
 
 function getStartAndEndDate(date, duration) {
     let startDate, endDate;
-    const [year, month, day] = date.split("-").map(Number); // Assuming date is in format d/m/y
+    const year = new Date(date).getFullYear(); 
+    const month = new Date(date).getMonth() + 1;
+    const day =  new Date(date).getDate();
+
 
     if (duration === "daily") {
         startDate = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
@@ -76,11 +73,11 @@ function getStartAndEndDate(date, duration) {
         endDate.setHours(23, 59, 59, 999); // End of the day
     }
 
-    return [startDate.getTime(), endDate.getTime()];
+    return [startDate?.getTime(), endDate?.getTime()];
 }
 
-const getAllExpenses = async (uid, month, year) => {
-    const q = getTransactionQuery(uid, month, year);
+const getAllExpenses = async (uid, date, duration) => {
+    const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
 
     let expense = 0;
@@ -95,8 +92,8 @@ const getAllExpenses = async (uid, month, year) => {
     return { total: expense, data };
 };
 
-const getAllIncome = async (uid, month, year) => {
-    const q = getTransactionQuery(uid, month, year);
+const getAllIncome = async (uid, date, duration) => {
+    const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
 
     let income = 0;

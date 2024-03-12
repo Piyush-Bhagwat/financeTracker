@@ -1,53 +1,32 @@
-import React, {
-    createContext,
-    useContext,
-    useEffect,
-    useId,
-    useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { login } from "../database/auth.db";
-import { getCategories } from "../database/user.db";
-import {
-    useCollectionData,
-    useDocumentData,
-    useCollection,
-} from "react-firebase-hooks/firestore";
-import { collection, doc, orderBy, query } from "firebase/firestore";
+import { useDocumentData, useCollection } from "react-firebase-hooks/firestore";
+import { collection, doc } from "firebase/firestore";
 import { db } from "../database/config.db";
 import {
     getAllExpenses,
     getAllIncome,
     getTransactionQuery,
+    getTransactions,
 } from "../database/transaction.db";
 
 const chartContext = createContext();
-let uid;
+
 export const ContextProvider = ({ children }) => {
     const [active, setActive] = useState(1);
     const [uid, setUid] = useState(null);
-    const [user] = useDocumentData(doc(db, `users/${uid}`)); //it will get realtime changes from balances
+    const [user] = useDocumentData(doc(db, `users/${uid}`));
     const [date, setDate] = useState(new Date());
     const [duration, setDuration] = useState("monthly");
     const [cashBal, setCashBal] = useState(null);
     const [bankBal, setBankBal] = useState(null);
-
     const [incomes, setIncomes] = useState(null);
     const [expenses, setExpenses] = useState(null);
-
     const [categories, setCategories] = useState(null);
     const [transactions, setTransaction] = useState(null);
-
     const [categoriesSnap] = useCollection(
         collection(db, `users/${user?.uid}/categories`)
     );
-
-    const transactionQuery = getTransactionQuery(
-        user?.uid,
-        date.getMonth(),
-        date.getFullYear()
-    );
-
-    const [transactionsSnap] = useCollection(transactionQuery);
 
     const totalIncome = incomes?.reduce(
         (total, income) => total + parseFloat(income.amount),
@@ -58,111 +37,70 @@ export const ContextProvider = ({ children }) => {
         0
     );
 
-    // -------------Functions--------------------
+    const totalBalance = cashBal + bankBal;
+
     const handleLogin = async () => {
         const userID = await login();
         setUid(userID);
-
         localStorage.setItem("user", JSON.stringify(userID));
     };
 
     const checkLoginData = () => {
         let userID = localStorage.getItem("user");
         userID = JSON.parse(userID);
-
         if (userID) {
             setUid(userID);
         }
     };
 
-    const getIncome = async () => {
-        const incoms = await getAllIncome(
-            user?.uid,
-            date.getMonth(),
-            date.getFullYear()
-        );
-
+    const fetchData = async () => {
+        const incoms = await getAllIncome(user?.uid, date, duration);
         setIncomes(incoms?.data);
-    };
 
-    const getExpence = async () => {
-        const incoms = await getAllExpenses(
-            user?.uid,
-            date.getMonth(),
-            date.getFullYear()
+        const expensesData = await getAllExpenses(user?.uid, date, duration);
+        setExpenses(expensesData?.data);
+
+        const transactionData = await getTransactions(
+            getTransactionQuery(user?.uid, date, duration)
         );
-
-        setExpenses(incoms?.data);
+        setTransaction(transactionData);
     };
-    const totalBalance = cashBal + bankBal;
 
-    function getStartAndEndDate(date, duration) {
-        let startDate, endDate;
-        const [year, month, day] = date.split("-").map(Number); // Assuming date is in format d/m/y
-
-        if (duration === "daily") {
-            startDate = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
-            endDate = new Date(year, month - 1, day, 23, 59, 59, 999); // End of the day
-        } else if (duration === "weekly") {
-            const selectedDate = new Date(year, month - 1, day);
-            const dayOfWeek = selectedDate.getDay(); // 0 (Sunday) to 6 (Saturday)
-            const diff =
-                selectedDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Start of the week
-            startDate = new Date(selectedDate.setDate(diff));
-            endDate = new Date(selectedDate.setDate(diff + 6)); // End of the week
-            endDate.setHours(23, 59, 59, 999); // End of the day
-        } else if (duration === "monthly") {
-            startDate = new Date(year, month - 1, 1); // First day of the month
-            endDate = new Date(year, month, 0); // Last day of the month
-            endDate.setHours(23, 59, 59, 999); // End of the day
-        }
-
-        return [startDate.getTime(), endDate.getTime()];
-    }
-
-    //---------------------on Page Load-----------------------
     useEffect(() => {
         checkLoginData();
     }, []);
 
     useEffect(() => {
-        //get categories
-        const newCat = categoriesSnap?.docs?.map((cat) => {
-            return { id: cat.id, ...cat.data() };
-        });
-
+        const newCat = categoriesSnap?.docs?.map((cat) => ({
+            id: cat.id,
+            ...cat.data(),
+        }));
         setCategories(newCat);
     }, [categoriesSnap]);
-
-    useEffect(() => {
-        //get categories
-        const newTrans = transactionsSnap?.docs?.map((cat) => {
-            return { id: cat.id, ...cat.data() };
-        });
-
-        setTransaction(newTrans);
-    }, [transactionsSnap]);
 
     useEffect(() => {
         setCashBal(user?.cashBal);
         setBankBal(user?.bankBal);
     }, [user]);
 
-    // -----------------All print statements------------------
+    useEffect(() => {
+        if (user) {
+            console.log("user Update");
+            fetchData();
+        }
+    }, [user, date, duration]);
 
     useEffect(() => {
-        if (user) console.log("user Update", user);
-        getIncome();
-        getExpence();
-    }, [user]);
-
-    useEffect(() => {
-        if (categories) console.log("Categories Update", categories);
+        if (categories) console.log("Categories Update");
     }, [categories]);
 
     useEffect(() => {
-        if (transactions) console.log("Transactions Update", transactions);
+        if (transactions) console.log("Transactions Update");
     }, [transactions]);
+
+    useEffect(() => {
+        console.log("Duration Update");
+    }, [duration]);
 
     useEffect(() => {
         setDate(new Date());
@@ -184,7 +122,6 @@ export const ContextProvider = ({ children }) => {
         transactions,
         duration,
         setDuration,
-        getStartAndEndDate,
         setUid,
         active,
         date,
@@ -203,5 +140,3 @@ export const ContextProvider = ({ children }) => {
 export const useGlobalContext = () => {
     return useContext(chartContext);
 };
-
-export { uid };
