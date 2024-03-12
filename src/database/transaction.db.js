@@ -83,7 +83,7 @@ const getAllExpenses = async (uid, date, duration) => {
     const data = [];
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "expense") {
-            data.push({ id: doc.id, ...doc.data() , month, year});
+            data.push({ id: doc.id, ...doc.data()});
             expense += parseFloat(doc.data().amount);
         }
     });
@@ -101,7 +101,7 @@ const getAllIncome = async (uid, date, duration) => {
 
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "income") {
-            data.push({ id: doc.id, ...doc.data(), month, year });
+            data.push({ id: doc.id, ...doc.data()});
             income += parseFloat(doc.data().amount);
         }
     });
