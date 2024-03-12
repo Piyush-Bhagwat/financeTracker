@@ -39,4 +39,6 @@ const addCategory = async (uid, categoryData) => {
     console.log("added a category");
 };
 
-export { setBalance, getCategories, addCategory };
+
+
+export { setBalance, getCategories, addCategory};

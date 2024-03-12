@@ -8,13 +8,12 @@ import { Progress } from "antd";
 
 function Dashboard() {
     const chartRef = useRef(null);
-    const { totalIncome, totalExpenses } = useGlobalContext();
+    const { totalIncome, totalExpenses, totalBalance } = useGlobalContext();
 
-    const incomePercentage =
-        (totalIncome / (totalIncome + totalExpenses)) * 100;
-    const expensePercentage =
-        (totalExpenses / (totalIncome + totalExpenses)) * 100;
+    const expensePercentage = totalIncome === 0 ? totalExpenses : Math.min((totalExpenses / totalIncome) * 100, 100).toFixed(0);
+const balancePercentage = totalIncome === 0 ? 0 : Math.max(((totalIncome - totalExpenses) / totalIncome) * 100, 0).toFixed(0);
 
+    
     useEffect(() => {
         if (!chartRef.current) return;
 
@@ -42,7 +41,7 @@ function Dashboard() {
                 plugins: {
                     legend: {
                         labels: {
-                            color: "white", // Set label color to white
+                            color: "white", 
                         },
                     },
                 },
@@ -78,63 +77,57 @@ function Dashboard() {
         <div className="container">
             <div className="statistics">
                 <div className="chart">
-                    <h2>Total Income Vs Total Expenses</h2>
+                    <h4>Total Income Vs Total Expenses</h4>
                     <canvas ref={chartRef}></canvas>
                 </div>
 
                 <div className="chartLine">
                     <div className="line">
-                        <h2>Daily Expenses</h2>
+                        <h4>Income and Expenses Over Time</h4>
                         <ChartComponent></ChartComponent>
                     </div>
                 </div>
 
-                <h2>Overall Percentage</h2>
+                <h4>Overall Percentage</h4>
                 <div className="progress">
-                    <div className="circle">
-                        <h3>Total Income</h3>
-                        <p>
-                            <Progress
-                                type="circle"
-                                strokeColor={"green"}
-                                percent={incomePercentage}
-                                format={() => (
-                                    <span
-                                        style={{ color: "white" }}
-                                    >{`${incomePercentage}%`}</span>
-                                )}
-                            ></Progress>
-                            {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
-                            {totalIncome}
-                        </p>
-                    </div>
 
                     <div className="circle">
-                        <h3>Total Expenses</h3>
-                        <p>
+                        <h5>Total Expenses</h5>
+                        
                             <Progress
                                 type="circle"
-                                strokeColor={"green"}
+                                strokeColor={"red"}
                                 percent={expensePercentage}
                                 format={() => (
                                     <span
                                         style={{ color: "white" }}
-                                    >{`${incomePercentage}%`}</span>
+                                    >{`${expensePercentage}%`}</span>
                                 )}
+                                trailColor={"#e9e9e9"}
                             ></Progress>
                             {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
-                            {totalExpenses}
-                        </p>
+                            {/* {totalExpenses} */}
+                       
                     </div>
 
-                    {/* <div className="balance">
-            <h2>Total Balance</h2>
-            <p>
-              <Progress type='circle' strokeColor={'green'} percent={totalBalance}></Progress>
-              <FontAwesomeIcon icon="fas fa-rupee-sign" />
-              {totalBalance}
-            </p>
-          </div> */}
+                    <div className="circle">
+                        <h5>Total Balance</h5>
+                       
+                            <Progress
+                                type="circle"
+                                strokeColor={"green"}
+                                percent={balancePercentage}
+                                format={() => (
+                                    <span
+                                        style={{ color: "white" }}
+                                    >{`${balancePercentage}%`}</span>
+                                )}
+                                trailColor={"#e9e9e9"}
+                            ></Progress>
+                            {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
+                            {/* {totalExpenses} */}
+                      
+                    </div>
                 </div>
             </div>
         </div>

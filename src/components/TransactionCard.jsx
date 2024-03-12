@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/style/transactioncard.css";
+import "../assets/style/transactionCard.css";
 import { useGlobalContext } from "../context/Context";
 
 const TransactionCard = ({ type, mode, category, amount, note, time }) => {
