@@ -26,11 +26,14 @@ const Home = () => {
         </div>
       </div>
       <div className="recent-transactions">
-        <span>Recent Transactions</span>
-        <Link to="/transactions" className="view-all" onClick={()=>setActive(1)}>
-          See All
-        </Link>
-        {transactions?.map((trans) => (
+
+        <div className="see-all">
+          <span>Recent Transactions</span>
+          <Link to="/transactions" className="sm-btn" onClick={()=>setActive(1)}>
+            See All
+          </Link>
+        </div>
+        {transactions?.slice(0, 3)?.map((trans) =>   //slice the array to limmit only 3 result 
           <TransactionCard
             key={trans.id}
             amount={trans.amount}
@@ -40,7 +43,7 @@ const Home = () => {
             time={trans.time}
             mode={trans.mode}
           />
-        ))}
+        )}
       </div>
     </div>
   );

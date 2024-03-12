@@ -14,7 +14,7 @@
 }
 
 .balance {
-  width: 300px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,14 +36,15 @@
 
 .summary {
   margin-top: 20px;
+  width: 100%;
   display: flex;
-  gap: 10px;
-  justify-content: space-evenly;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .income,
 .expenses {
-  width: 150px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,55 +80,22 @@
   margin-bottom: 10px;
 }
 
-.view-all {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #007bff;
-  color: #fff;
+.sm-btn {
+  background-color: var(--primary);
+  color: var(--background);
   border: none;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 1em;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.view-all:hover {
-  background-color: #0056b3;
-}
 
-/* TransactionCard component styles */
-.transaction-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-.transaction-card .amount {
-  font-size: 16px;
-}
-
-.transaction-card .category {
-  font-size: 14px;
-}
-
-.transaction-card .type {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.transaction-card .note {
-  font-size: 14px;
-}
-
-.transaction-card .time {
-  font-size: 12px;
-  color: #666;
-}
-
-.transaction-card .mode {
-  font-size: 12px;
-  color: #666;
+.see-all{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
