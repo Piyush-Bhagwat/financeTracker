@@ -19,20 +19,17 @@ function Chart() {
     const [labels, setLabels] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
 
-    const [previousIncome, setPreviousIncome] = useState(0);
-    const [previousExpenses, setPreviousExpenses] = useState(0);
-
     useEffect(() => {
         const fetchData = async () => {
-            const allData = Math.max(incomes?.data.length, expenses?.data.length)
+            const allData = Math.max(incomes?.length, expenses?.length);
 
-            console.log("data  ", incomes);
+            // console.log("data  ", incomes);
 
-            setLabels(range(1, allData+1));
+            setLabels(range(1, allData + 1));
         };
 
         fetchData();
-    }, [selectedMonth, user]);
+    }, [incomes, expenses]);
 
     const handleMonthChange = (event) => {
         setSelectedMonth(parseInt(event.target.value));
@@ -42,7 +39,7 @@ function Chart() {
         // const ar = [];
 
         let newAr = ar
-            .slice()
+            ?.slice()
             .reverse()
             .map((sth) => sth.amount);
 
