@@ -46,6 +46,7 @@ const Transactions = () => {
     <div className="transactions">
       <div className="transaction-sort-container">
         <select name="transaction-sort" id="transactionSort">
+          <option value="select" selected>Select</option>
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
