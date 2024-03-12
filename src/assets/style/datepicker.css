@@ -20,17 +20,16 @@
     box-shadow: 0 0 0 0.1rem rgba(30, 144, 255, 0.25);
   }
   
-  /* Custom styles for the dropdown arrow */
+ 
   #date-picker::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
   
-  /* Custom styles for the dropdown arrow for Firefox */
+  
   #date-picker:-moz-calendar-picker-indicator {
     filter: invert(1);
   }
   
-  /* Custom styles for dropdown list */
   #date-picker::after {
     content: "\25BC"; 
     position: absolute;

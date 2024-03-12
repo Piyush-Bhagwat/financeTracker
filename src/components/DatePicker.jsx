@@ -6,6 +6,7 @@ const DatePicker = () => {
 
   const handleDateChange = (event) => {
     const dateValue = event.target.value;
+    console.log(dateValue);
     setSelectedDate(new Date(dateValue));
   };
 

@@ -1,10 +1,13 @@
-.transactions {
-  padding: 3% 3%;
+
+
+.transactions{
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: auto;
+  justify-content: center;
 }
 
 .transaction-sort-container {
