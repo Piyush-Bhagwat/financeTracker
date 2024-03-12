@@ -51,10 +51,9 @@ const getTransactionQuery = (uid, date, duration) => {
 
 function getStartAndEndDate(date, duration) {
     let startDate, endDate;
-    const year = new Date(date).getFullYear(); 
+    const year = new Date(date).getFullYear();
     const month = new Date(date).getMonth() + 1;
-    const day =  new Date(date).getDate();
-
+    const day = new Date(date).getDate();
 
     if (duration === "daily") {
         startDate = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
@@ -77,6 +76,7 @@ function getStartAndEndDate(date, duration) {
 }
 
 const getAllExpenses = async (uid, date, duration) => {
+    
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
 
@@ -93,6 +93,7 @@ const getAllExpenses = async (uid, date, duration) => {
 };
 
 const getAllIncome = async (uid, date, duration) => {
+    
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
 
