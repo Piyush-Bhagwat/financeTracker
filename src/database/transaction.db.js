@@ -29,9 +29,8 @@ const getTransactions = async (query) => {
     const transactions = [];
 
     transactionsSnapShot.forEach((doc) => {
-        transactions.push({ id: doc.id, ...doc.data() });
+        transactions.push({ id: doc.id, ...doc.data().amount, ...doc.data() });
     });
-
     return transactions;
 };
 
@@ -51,10 +50,9 @@ const getTransactionQuery = (uid, date, duration) => {
 
 function getStartAndEndDate(date, duration) {
     let startDate, endDate;
-    const year = new Date(date).getFullYear(); 
+    const year = new Date(date).getFullYear();
     const month = new Date(date).getMonth() + 1;
-    const day =  new Date(date).getDate();
-
+    const day = new Date(date).getDate();
 
     if (duration === "daily") {
         startDate = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
@@ -77,6 +75,7 @@ function getStartAndEndDate(date, duration) {
 }
 
 const getAllExpenses = async (uid, date, duration) => {
+    
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
 
@@ -84,7 +83,7 @@ const getAllExpenses = async (uid, date, duration) => {
     const data = [];
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "expense") {
-            data.push({ id: doc.id, ...doc.data() });
+            data.push({ id: doc.id, ...doc.data()});
             expense += parseFloat(doc.data().amount);
         }
     });
@@ -93,19 +92,20 @@ const getAllExpenses = async (uid, date, duration) => {
 };
 
 const getAllIncome = async (uid, date, duration) => {
+    
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
-
+    console.log("Income documents snapshot:", docSnapshot);
     let income = 0;
     const data = [];
 
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "income") {
-            data.push({ id: doc.id, ...doc.data() });
+            data.push({ id: doc.id, ...doc.data()});
             income += parseFloat(doc.data().amount);
         }
     });
-
+    console.log('heiii',{ total: income, data })
     return { total: income, data };
 };
 

@@ -27,17 +27,37 @@ export const ContextProvider = ({ children }) => {
     const [categoriesSnap] = useCollection(
         collection(db, `users/${user?.uid}/categories`)
     );
+    const [totalIncome, setTotalIncome] = useState(null);
+    const [totalExpenses, setTotalExpenses] = useState(null);
 
-    const totalIncome = incomes?.reduce(
-        (total, income) => total + parseFloat(income.amount),
-        0
-    );
-    const totalExpenses = expenses?.reduce(
-        (total, expense) => total + parseFloat(expense.amount),
-        0
-    );
+    // const totalIncome = incomes?.reduce(
+    //     (total, income) => total + parseFloat(income.amount),
+    //     0
+    // );
+    // const totalExpenses = expenses?.reduce(
+    //     (total, expense) => total + parseFloat(expense.amount),
+    //     0
+    // );
 
     const totalBalance = cashBal + bankBal;
+
+    const getTotalIncome = () => {
+        const tI = incomes?.reduce(
+            (total, income) => total + parseFloat(income.amount),
+            0
+        );
+
+        setTotalIncome(tI);
+    };
+
+    const getTotalExpenses = () => {
+        const tE = expenses?.reduce(
+            (total, expense) => total + parseFloat(expense.amount),
+            0
+        );
+
+        setTotalExpenses(tE);
+    };
 
     const handleLogin = async () => {
         const userID = await login();
@@ -56,7 +76,6 @@ export const ContextProvider = ({ children }) => {
     const fetchData = async () => {
         const incoms = await getAllIncome(user?.uid, date, duration);
         setIncomes(incoms?.data);
-
         const expensesData = await getAllExpenses(user?.uid, date, duration);
         setExpenses(expensesData?.data);
 
@@ -89,6 +108,11 @@ export const ContextProvider = ({ children }) => {
             fetchData();
         }
     }, [user, date, duration]);
+
+    useEffect(() => {
+        getTotalExpenses();
+        getTotalIncome();
+    }, [incomes, expenses]);
 
     useEffect(() => {
         if (categories) console.log("Categories Update");

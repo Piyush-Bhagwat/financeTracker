@@ -5,15 +5,16 @@ import "../../assets/style/dashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ChartComponent from "../chart/Chart";
 import { Progress } from "antd";
+import PieChart from "../chart/PieChart";
 
 function Dashboard() {
     const chartRef = useRef(null);
     const { totalIncome, totalExpenses, totalBalance } = useGlobalContext();
 
     const expensePercentage = totalIncome === 0 ? totalExpenses : Math.min((totalExpenses / totalIncome) * 100, 100).toFixed(0);
-const balancePercentage = totalIncome === 0 ? 0 : Math.max(((totalIncome - totalExpenses) / totalIncome) * 100, 0).toFixed(0);
+    const balancePercentage = totalIncome === 0 ? 0 : Math.max(((totalIncome - totalExpenses) / totalIncome) * 100, 0).toFixed(0);
 
-    
+
     useEffect(() => {
         if (!chartRef.current) return;
 
@@ -41,7 +42,7 @@ const balancePercentage = totalIncome === 0 ? 0 : Math.max(((totalIncome - total
                 plugins: {
                     legend: {
                         labels: {
-                            color: "white", 
+                            color: "white",
                         },
                     },
                 },
@@ -49,19 +50,19 @@ const balancePercentage = totalIncome === 0 ? 0 : Math.max(((totalIncome - total
                 scales: {
                     x: {
                         grid: {
-                            color: "rgba(240, 240, 240, 0.5)", // Lightish white color for x-axis grid lines
+                            color: "rgba(240, 240, 240, 0.5)", 
                         },
                         ticks: {
-                            color: "rgba(240, 240, 240, 0.8)", // Lightish white color for x-axis labels
+                            color: "rgba(240, 240, 240, 0.8)", 
                         },
                     },
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: "rgba(255, 255, 255, 0.2)", // Set the color of the grid lines to white
+                            color: "rgba(255, 255, 255, 0.2)", 
                         },
                         ticks: {
-                            color: "rgba(240, 240, 240, 0.5)", // Make x-axis labels bold
+                            color: "rgba(240, 240, 240, 0.5)", 
                         },
                     },
                 },
@@ -93,40 +94,45 @@ const balancePercentage = totalIncome === 0 ? 0 : Math.max(((totalIncome - total
 
                     <div className="circle">
                         <h5>Total Expenses</h5>
-                        
-                            <Progress
-                                type="circle"
-                                strokeColor={"red"}
-                                percent={expensePercentage}
-                                format={() => (
-                                    <span
-                                        style={{ color: "white" }}
-                                    >{`${expensePercentage}%`}</span>
-                                )}
-                                trailColor={"#e9e9e9"}
-                            ></Progress>
-                            {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
-                            {/* {totalExpenses} */}
-                       
+
+                        <Progress
+                            type="circle"
+                            strokeColor={"red"}
+                            percent={expensePercentage}
+                            format={() => (
+                                <span
+                                    style={{ color: "white" }}
+                                >{`${expensePercentage}%`}</span>
+                            )}
+                            trailColor={"#e9e9e9"}
+                        ></Progress>
+                        {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
+                        {/* {totalExpenses} */}
+
                     </div>
 
                     <div className="circle">
                         <h5>Total Balance</h5>
-                       
-                            <Progress
-                                type="circle"
-                                strokeColor={"green"}
-                                percent={balancePercentage}
-                                format={() => (
-                                    <span
-                                        style={{ color: "white" }}
-                                    >{`${balancePercentage}%`}</span>
-                                )}
-                                trailColor={"#e9e9e9"}
-                            ></Progress>
-                            {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
-                            {/* {totalExpenses} */}
-                      
+
+                        <Progress
+                            type="circle"
+                            strokeColor={"green"}
+                            percent={balancePercentage}
+                            format={() => (
+                                <span
+                                    style={{ color: "white" }}
+                                >{`${balancePercentage}%`}</span>
+                            )}
+                            trailColor={"#e9e9e9"}
+                        ></Progress>
+                        {/* <FontAwesomeIcon icon="fas fa-rupee-sign" /> */}
+                        {/* {totalExpenses} */}
+
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <PieChart></PieChart>
                     </div>
                 </div>
             </div>
