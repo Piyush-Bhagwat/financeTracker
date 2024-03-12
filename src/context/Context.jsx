@@ -80,18 +80,18 @@ export const ContextProvider = ({ children }) => {
             curDate.getMonth(),
             curDate.getFullYear()
         );
-
+        console.log("Income data context:", incoms.data);
         setIncomes(incoms?.data);
     };
 
     const getExpence = async () => {
-        const incoms = await getAllExpenses(
+        const expense = await getAllExpenses(
             user?.uid,
             curDate.getMonth(),
             curDate.getFullYear()
         );
-
-        setExpenses(incoms?.data);
+        console.log("expense data context:", expense);
+        setExpenses(expense?.data);
     };
     const totalBalance = totalIncome - totalExpenses;
 

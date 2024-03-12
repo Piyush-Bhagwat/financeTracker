@@ -22,10 +22,10 @@ const getTransactions = async (uid) => {
     const transactions = [];
 
     transactionsSnapShot.forEach((doc) => {
-        transactions.push({ id: doc.id, ...doc.data() });
+        transactions.push({ id: doc.id, ...doc.data().amount, ...doc.data() });
     });
 
-    console.log(transactions);
+    console.log('transactions',transactions);
     return transactions;
 };
 
@@ -48,6 +48,7 @@ const getTransactionQuery = (uid, month, year) => {
 };
 
 const getAllExpenses = async (uid, month, year) => {
+    console.log("Fetching expenses for month:", month, "year:", year);
     const q = getTransactionQuery(uid, month, year);
     const docSnapshot = (await getDocs(q)).docs;
     console.log("snap", docSnapshot);
@@ -56,7 +57,7 @@ const getAllExpenses = async (uid, month, year) => {
     const data = [];
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "expense") {
-            data.push({ id: doc.id, ...doc.data() });
+            data.push({ id: doc.id, ...doc.data() , month, year});
             expense += parseFloat(doc.data().amount);
         }
     });
@@ -65,19 +66,20 @@ const getAllExpenses = async (uid, month, year) => {
 };
 
 const getAllIncome = async (uid, month, year) => {
+    console.log("Fetching income for month:", month, "year:", year);
     const q = getTransactionQuery(uid, month, year);
     const docSnapshot = (await getDocs(q)).docs;
-
+    console.log("Income documents snapshot:", docSnapshot);
     let income = 0;
     const data = [];
 
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "income") {
-            data.push({ id: doc.id, ...doc.data() });
+            data.push({ id: doc.id, ...doc.data(), month, year });
             income += parseFloat(doc.data().amount);
         }
     });
-
+    console.log('heiii',{ total: income, data })
     return { total: income, data };
 };
 

@@ -29,7 +29,8 @@ const getCategories = async (uid) => {
         categories.push({ id: cat.id, ...cat.data() });
     });
 
-    console.log(categories);
+    console.log('fewfefefe',categories);
+    return categories; 
 };
 
 const addCategory = async (uid, categoryData) => {
