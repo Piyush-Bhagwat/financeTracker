@@ -75,7 +75,6 @@ function getStartAndEndDate(date, duration) {
 }
 
 const getAllExpenses = async (uid, date, duration) => {
-    
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
 
@@ -83,7 +82,7 @@ const getAllExpenses = async (uid, date, duration) => {
     const data = [];
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "expense") {
-            data.push({ id: doc.id, ...doc.data()});
+            data.push({ id: doc.id, ...doc.data() });
             expense += parseFloat(doc.data().amount);
         }
     });
@@ -92,20 +91,17 @@ const getAllExpenses = async (uid, date, duration) => {
 };
 
 const getAllIncome = async (uid, date, duration) => {
-    
     const q = getTransactionQuery(uid, date, duration);
     const docSnapshot = (await getDocs(q)).docs;
-    console.log("Income documents snapshot:", docSnapshot);
     let income = 0;
     const data = [];
 
     docSnapshot?.forEach((doc) => {
         if (doc.data().type === "income") {
-            data.push({ id: doc.id, ...doc.data()});
+            data.push({ id: doc.id, ...doc.data() });
             income += parseFloat(doc.data().amount);
         }
     });
-    console.log('heiii',{ total: income, data })
     return { total: income, data };
 };
 
