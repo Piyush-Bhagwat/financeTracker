@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Keypad from "./Keypad";
 import { setBalance } from "../database/user.db";
 import { useGlobalContext } from "../context/Context";
@@ -6,6 +6,7 @@ import { useGlobalContext } from "../context/Context";
 const Model = ({ whereTo, amount, setAmount, setIsModelOpen }) => {
     const { user } = useGlobalContext();
     const [amt, setAmt] = useState(amount === 0 ? "" : amount);
+    const [showCalBtn, setShowCalBtn] = useState(false);
 
     const handleNumberClick = (value) => {
         setAmt((prevAmt) => prevAmt + value);
@@ -42,6 +43,8 @@ const Model = ({ whereTo, amount, setAmount, setIsModelOpen }) => {
                     handleBackspace={handleBackspace}
                     handleClear={handleClear}
                     handleSubmit={handleSubmit}
+                    setShowCalBtn={setShowCalBtn}
+                    showCalBtn={showCalBtn}
                 />
             </div>
         </div>

@@ -14,11 +14,7 @@
 .second-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.time-picker{
-  color: #000;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
@@ -112,6 +108,7 @@
   font-weight: bold;
   color: #a7a7a7;
 }
+
 
 @media (max-width: 425px) {
 
