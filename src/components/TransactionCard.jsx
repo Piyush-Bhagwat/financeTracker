@@ -1,5 +1,7 @@
 import React from "react";
 import "../assets/style/transactionCard.css";
+import { TbEdit } from "react-icons/tb";
+import { MdOutlineDelete } from "react-icons/md";
 import { useGlobalContext } from "../context/Context";
 
 const TransactionCard = ({ type, mode, category, amount, note, time }) => {

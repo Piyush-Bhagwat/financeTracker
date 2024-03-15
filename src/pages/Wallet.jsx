@@ -14,10 +14,7 @@ const Wallet = () => {
         setSelectedType(type);
     };
 
-    const onResetClick=()=>{
-        setBankBal(0);
-        setCashBal(0);
-    }
+    
     useEffect(() => {
         // Convert amount values to Float before performing addition
         const total = parseFloat(cashBal) + parseFloat(bankBal);
@@ -56,10 +53,6 @@ const Wallet = () => {
                     </button>
                 </div>
             </div>
-
-            <button className="reset-btn" onClick={onResetClick}>
-                Reset
-            </button>
 
             {isModelOpen && (
                 <Model

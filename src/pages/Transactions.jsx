@@ -28,14 +28,14 @@ const Transactions = () => {
     let prevDate = "null";
     return (
       <>
-        {transactions?.map((trans) => {
+        {transactions?.map((trans , i) => {
           let curDate = getDateString(trans.time);
           let sameDate = prevDate === curDate;
           if (!sameDate) {
             prevDate = curDate;
           }
           return (
-            <>
+            <div key={i} className="cards-conatainer">
               {!sameDate && (
                 <h3 className="date">
                   {curDate === today ? "Today" : curDate}
@@ -50,7 +50,7 @@ const Transactions = () => {
                 time={trans.time}
                 mode={trans.mode}
               />
-            </>
+            </div>
           );
         })}
       </>

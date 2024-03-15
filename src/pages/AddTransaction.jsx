@@ -3,7 +3,7 @@ import "../assets/style/addtransaction.css";
 import Keypad from "../components/Keypad";
 import { useGlobalContext } from "../context/Context";
 import { addTransaction } from "../database/transaction.db";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "../components/DatePicker";
 
 const AddTransaction = () => {
@@ -35,8 +35,6 @@ const AddTransaction = () => {
   const handleClear = () => {
     setAmount("");
   };
-
- 
 
   const handleSubmit = async () => {
     if (amount === "") {
