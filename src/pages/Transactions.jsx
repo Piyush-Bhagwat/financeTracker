@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import "../assets/style/transactions.css";
 import { useGlobalContext } from "../context/Context";
-import DatePicker from "../components/DatePicker";
-import TimePicker from 'react-time-picker'
+import FiltersMenu from "../components/FiltersMenu";
+import { LuFilter } from "react-icons/lu";
 
 const Transactions = () => {
-  const { transactions, categories, duration, setDuration } =
-    useGlobalContext();
-  const [mode, setMode] = useState("");
-  const [category, setCategory] = useState("");
-  const [type, setType] = useState("")
-  const [startdate, setStartDate] = useState(new Date());
+  const { transactions } = useGlobalContext();
+  const [today, setToday] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const getDateString = (time) => {
     const t = new Date(time);
-
     return `${t.getDate()}/${t.getMonth() + 1}/${t.getFullYear()}`;
   };
+
+  useEffect(() => {
+    const tday = new Date();
+    const tdayString = `${tday.getDate()}/${
+      tday.getMonth() + 1
+    }/${tday.getFullYear()}`;
+    setToday(tdayString);
+    console.log(tdayString);
+  }, [today]);
 
   const renderCards = () => {
     let prevDate = "null";
@@ -31,7 +36,11 @@ const Transactions = () => {
           }
           return (
             <>
-              {!sameDate && <h3 className="date">{curDate}</h3>}
+              {!sameDate && (
+                <h3 className="date">
+                  {curDate === today ? "Today" : curDate}
+                </h3>
+              )}
               <TransactionCard
                 amount={trans.amount}
                 key={trans.id}
@@ -49,62 +58,13 @@ const Transactions = () => {
   };
   return (
     <div className="transactions">
-      <div className="transaction-sort-container">
-        <select
-          name="transaction-sort"
-          id="transactionSort"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-        >
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-        </select>
-
-        <select
-          name="mode-sort"
-          id="transactionSort"
-          defaultValue="all"
-          value={mode}
-          onChange={(e) => setMode(e.target.value)}
-        >
-          <option value="cash">Cash</option>
-          <option value="card">Card</option>
-          <option value="upi">UPI</option>
-          <option value="netbanking">Netbanking</option>
-          <option value="all">All</option>
-        </select>
-
-        <select
-          name="mode-sort"
-          id="transactionSort"
-          defaultValue="all"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-            <option value="all">All</option>
-          {categories?.map((cat) => {
-            return (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            );
-          })}
-        </select>
-
-        <select
-          name="transaction-sort"
-          id="transactionSort"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="Expenses">Expenses</option>
-          <option value="Income">Income</option>
-        </select>
-
-        <DatePicker />
+      <div className="btn-div">
+      <button className="filter-button" onClick={() => setIsMenuOpen(true)}>
+        <LuFilter />
+      </button>
       </div>
+
+      {isMenuOpen ? <FiltersMenu setIsMenuOpen={setIsMenuOpen} /> : null}
       {renderCards()}
     </div>
   );

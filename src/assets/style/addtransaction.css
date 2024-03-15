@@ -14,6 +14,9 @@
 .second-row {
   display: flex;
   align-items: center;
+
+  justify-content: center;
+
   justify-content: space-between;
 }
 
@@ -116,6 +119,7 @@
   font-weight: bold;
   color: #a7a7a7;
 }
+
 
 @media (max-width: 425px) {
 
