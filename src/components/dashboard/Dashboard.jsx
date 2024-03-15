@@ -75,10 +75,10 @@ function Dashboard() {
     }, [chartRef, totalIncome, totalExpenses]);
 
     return (
-        <div className="container">
+        <div className="">
             <div className="statistics">
-                <div className="chart">
                     <h4>Total Income Vs Total Expenses</h4>
+                <div className="chart container">
                     <canvas ref={chartRef}></canvas>
                 </div>
 
@@ -90,7 +90,7 @@ function Dashboard() {
                 </div>
 
                 <h4>Overall Percentage</h4>
-                <div className="progress">
+                <div className="progress container">
 
                     <div className="circle">
                         <h5>Total Expenses</h5>
@@ -130,8 +130,10 @@ function Dashboard() {
 
                     </div>
                 </div>
-                <div>
-                    <div>
+                <div className="pie-con">
+            <h3>Category Distributions</h3>
+                    <div className="container pie">
+
                         <PieChart></PieChart>
                     </div>
                 </div>
