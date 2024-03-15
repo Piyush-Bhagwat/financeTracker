@@ -86,7 +86,6 @@ function PieChart() {
 
     return (
         <div className="containerr">
-            <h3>Category Distributions</h3>
             <Doughnut data={pieData} options={options} />
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import "../assets/style/transactions.css";
 import { useGlobalContext } from "../context/Context";
+
 import FiltersMenu from "../components/FiltersMenu";
 import { LuFilter } from "react-icons/lu";
 
