@@ -16,7 +16,13 @@ export const ContextProvider = ({ children }) => {
     const [active, setActive] = useState(1);
     const [uid, setUid] = useState(null);
     const [user] = useDocumentData(doc(db, `users/${uid}`));
+
     const [date, setDate] = useState(new Date());
+    const [time, setTime] = useState("");
+    const [mode, setMode] = useState("");
+    const [type, setType] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("");
+
     const [duration, setDuration] = useState("monthly");
     const [cashBal, setCashBal] = useState(null);
     const [bankBal, setBankBal] = useState(null);
@@ -29,15 +35,6 @@ export const ContextProvider = ({ children }) => {
     );
     const [totalIncome, setTotalIncome] = useState(null);
     const [totalExpenses, setTotalExpenses] = useState(null);
-
-    // const totalIncome = incomes?.reduce(
-    //     (total, income) => total + parseFloat(income.amount),
-    //     0
-    // );
-    // const totalExpenses = expenses?.reduce(
-    //     (total, expense) => total + parseFloat(expense.amount),
-    //     0
-    // );
 
     const totalBalance = cashBal + bankBal;
 
@@ -74,16 +71,39 @@ export const ContextProvider = ({ children }) => {
     };
 
     const fetchData = async () => {
-        const incoms = await getAllIncome(user?.uid, date, duration);
+        const incoms = await getAllIncome(
+            user?.uid,
+            date,
+            duration,
+            categoryFilter,
+            type,
+            mode
+        );
         setIncomes(incoms?.data);
-        const expensesData = await getAllExpenses(user?.uid, date, duration);
+        const expensesData = await getAllExpenses(
+            user?.uid,
+            date,
+            duration,
+            categoryFilter,
+            type,
+            mode
+        );
         setExpenses(expensesData?.data);
 
         const transactionData = await getTransactions(
-            getTransactionQuery(user?.uid, date, duration)
+            getTransactionQuery(
+                user?.uid,
+                date,
+                duration,
+                categoryFilter,
+                type,
+                mode
+            )
         );
         setTransaction(transactionData);
     };
+
+    useEffect(() => console.log(categoryFilter), [categoryFilter]);
 
     useEffect(() => {
         checkLoginData();
@@ -107,7 +127,7 @@ export const ContextProvider = ({ children }) => {
             console.log("user Update");
             fetchData();
         }
-    }, [user, date, duration]);
+    }, [user, date, duration, mode, type, categoryFilter]);
 
     useEffect(() => {
         getTotalExpenses();
@@ -135,6 +155,12 @@ export const ContextProvider = ({ children }) => {
         setIncomes,
         expenses,
         setExpenses,
+        type,
+        setType,
+        mode,
+        setMode,
+        categoryFilter,
+        setCategoryFilter,
         totalIncome,
         totalExpenses,
         totalBalance,
@@ -154,6 +180,8 @@ export const ContextProvider = ({ children }) => {
         setCashBal,
         setActive,
         handleLogin,
+        time,
+        setTime,
     };
 
     return (

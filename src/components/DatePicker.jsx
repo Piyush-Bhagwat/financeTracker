@@ -13,7 +13,6 @@ const DatePicker = () => {
 
     return (
         <div className="custom-date-picker">
-            <div className="datepicker-value">
                 <input
                     type="date"
                     name="date-picker"
@@ -25,7 +24,7 @@ const DatePicker = () => {
                     }
                     onChange={handleDateChange}
                 />
-            </div>
+            
         </div>
     );
 };
