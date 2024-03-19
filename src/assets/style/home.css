@@ -10,7 +10,7 @@
 
 .home-header {
   font-size: 22px;
-  /* background: linear-gradient(to right, #62fc09, white); 
+  /* background: linear-gradient(to right, #6d8fff, #ffffff); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;  */
 }
@@ -112,7 +112,8 @@
 .blurry-box::before {
   content: '';
   position: absolute;
-  background:#768FAE;
+  /* background:#4a98b9; */
+  background: linear-gradient(to right, #468fae, #6c8efd); 
   z-index: -1;
 }
 
