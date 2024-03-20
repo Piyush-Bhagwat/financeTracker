@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../assets/style/transactioncard.css";
+import "../assets/style/transactionCard.css";
 import { useGlobalContext } from "../context/Context";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
