@@ -13,6 +13,7 @@ const AddTransaction = () => {
     const [amount, setAmount] = useState("");
     const [comment, setComment] = useState("");
     const [paymentMode, setPaymentMode] = useState("cash");
+
     const [transactionCategory, setTransactionCategory] = useState(
         categories?.at(0)?.id
     );

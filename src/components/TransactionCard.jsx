@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../assets/style/transactioncard.css";
 import { useGlobalContext } from "../context/Context";
+import { FaPencilAlt } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 
 const TransactionCard = ({ type, mode, category, amount, note, time }) => {
     const { categories } = useGlobalContext();
+    const [control, setControl] = useState(false);
+
+    const cardRef = useRef(null);
+
     let color, emoji, categoryName;
 
     const readCategory = () => {
@@ -25,8 +31,38 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
     getTime();
     readCategory();
 
+    const handleClickOutside = (event) => {
+        if (cardRef.current && !cardRef.current.contains(event.target)) {
+            setControl(false);
+        }
+    };
+
+    // Add event listener on component mount, remove on unmount
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
     return (
-        <div className="transaction-card">
+        <div
+            className={`transaction-card ${
+                control ? "transaction-active" : " "
+            }`}
+            onClick={() => setControl((p) => !p)}
+            ref={cardRef}
+        >
+            {control && (
+                <div className="transaction-control">
+                    <button>
+                        <MdDeleteForever /> Delete
+                    </button>
+                    <button>
+                        <FaPencilAlt /> Edit
+                    </button>
+                </div>
+            )}
+
             <div
                 className="icon"
                 style={{
