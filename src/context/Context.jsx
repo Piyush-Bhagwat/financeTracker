@@ -140,6 +140,7 @@ export const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (transactions) console.log("Transactions Update");
+
     }, [transactions]);
 
     useEffect(() => {

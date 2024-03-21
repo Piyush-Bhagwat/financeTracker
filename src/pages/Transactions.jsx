@@ -45,6 +45,7 @@ const Transactions = () => {
                             <TransactionCard
                                 amount={trans.amount}
                                 key={trans.id}
+                                id ={trans.id}
                                 category={trans.category}
                                 type={trans.type}
                                 note={trans.note}

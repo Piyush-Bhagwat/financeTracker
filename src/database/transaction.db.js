@@ -4,6 +4,8 @@ import {
     getDocs,
     query,
     where,
+    doc,
+    deleteDoc,
     orderBy,
 } from "@firebase/firestore";
 import { db } from "./config.db";
@@ -127,6 +129,11 @@ const getAllIncome = async (uid, date, duration, category, type, mode) => {
     return { total: income, data };
 };
 
+const deleteTransaction = async (uid, id) => {
+    await deleteDoc(doc(db, `users/${uid}/transactions/${id}`))
+    console.log("deleted");
+}
+
 const fuckIt = () => {
     alert("fuck it boi hehe");
 };
@@ -136,6 +143,7 @@ export {
     getTransactions,
     getAllExpenses,
     getAllIncome,
+    deleteTransaction,
     getTransactionQuery,
     fuckIt,
 };

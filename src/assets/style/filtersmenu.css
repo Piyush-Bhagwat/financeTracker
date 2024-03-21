@@ -1,6 +1,7 @@
 .filters-menu {
     position: fixed;
     top: 50%;
+    z-index: 100000000000;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--secondary);

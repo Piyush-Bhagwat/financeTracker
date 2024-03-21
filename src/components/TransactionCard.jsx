@@ -3,9 +3,10 @@ import "../assets/style/transactioncard.css";
 import { useGlobalContext } from "../context/Context";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { deleteTransaction } from "../database/transaction.db";
 
-const TransactionCard = ({ type, mode, category, amount, note, time }) => {
-    const { categories } = useGlobalContext();
+const TransactionCard = ({ type, mode, category, amount, note, id, time }) => {
+    const { categories, uid } = useGlobalContext();
     const [control, setControl] = useState(false);
 
     const cardRef = useRef(null);
@@ -37,6 +38,11 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
         }
     };
 
+    const handleDelete = async () => {
+        await deleteTransaction(uid, id);
+        window.location.reload()
+    };
+
     // Add event listener on component mount, remove on unmount
     useEffect(() => {
         document.addEventListener("click", handleClickOutside);
@@ -54,7 +60,7 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
         >
             {control && (
                 <div className="transaction-control">
-                    <button>
+                    <button onClick={handleDelete}>
                         <MdDeleteForever /> Delete
                     </button>
                     <button>
