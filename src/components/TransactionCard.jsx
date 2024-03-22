@@ -2,12 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import "../assets/style/transactioncard.css";
 import { useGlobalContext } from "../context/Context";
 import { FaPencilAlt } from "react-icons/fa";
-import { FaRegEdit } from "react-icons/fa";
-import { MdOutlineDelete } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteTransaction } from "../database/transaction.db";
+import { useNavigate } from "react-router-dom";
 
-const TransactionCard = ({ type, mode, category, amount, note, id, time }) => {
+const TransactionCard = ({
+  type,
+  mode,
+  category,
+  amount,
+  note,
+  id,
+  time,
+  showEditModel,
+  setShowEditModel,
+  transactionEdit,
+}) => {
+  
   const { categories, uid } = useGlobalContext();
   const [control, setControl] = useState(false);
 
@@ -46,6 +57,8 @@ const TransactionCard = ({ type, mode, category, amount, note, id, time }) => {
   };
 
   const handleEdit = () => {
+    setShowEditModel(!showEditModel);
+    transactionEdit(id);
     console.log("edit button clicked");
   };
 
@@ -76,8 +89,9 @@ const TransactionCard = ({ type, mode, category, amount, note, id, time }) => {
           <span className="cat">
             {type === "income" ? "Income" : categoryName}
           </span>
+          <span className="mode">{mode}</span>
+
           <div className="amount">
-            <span className="mode">{mode}</span>
             <span
               style={{
                 color: type === "income" ? "#2a8c2a" : "#e94040",
@@ -87,18 +101,18 @@ const TransactionCard = ({ type, mode, category, amount, note, id, time }) => {
             </span>
           </div>
         </div>
-        {!control && (
-          <div className="down">
-            <span className="note">{note}</span>
-            <span className="time">{time}</span>
-          </div>
-        )}
+
+        <div className="down">
+          <span className="note">{note}</span>
+          <span className="time">{time}</span>
+        </div>
+
         {control && (
-          <div className="transaction-control">
+          <div className="transaction-control ">
             <button onClick={handleDelete}>
               <MdDeleteForever /> Delete
             </button>
-            <button>
+            <button onClick={handleEdit}>
               <FaPencilAlt /> Edit
             </button>
           </div>
