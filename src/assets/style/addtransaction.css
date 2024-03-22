@@ -36,11 +36,20 @@
 
 .dropdowns {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   gap: 10px;
   margin-bottom: 20px;
   align-items: center;
+}
+
+.second-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.transaction-type{
+  width: 25%;
 }
 
 .transaction-dropdown,

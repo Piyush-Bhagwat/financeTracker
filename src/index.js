@@ -24,7 +24,7 @@ const router = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: "login", element: <Login /> },
             { path: "transactions", element: <Transactions /> },
-            { path: "add-transaction", element: <AddTransaction /> },
+            { path: "add-transaction", element: <AddTransaction /> }, 
             { path: "charts", element: <Charts /> },
             { path: "wallet", element: <Wallet /> },
             {path: "profile", element: <Profile />},

@@ -6,9 +6,13 @@ import { logout } from "../database/auth.db";
 import AddCategory from "../components/AddCategory";
 
 const Profile = () => {
-  const { categories, setUid, user } = useGlobalContext();
+  const { categories, setUid, user , setBankBal ,setCashBal} = useGlobalContext();
 
   const [showForm, setShowForm] = useState(false);
+  const onResetClick = () => {
+    setBankBal(0);
+    setCashBal(0);
+  };
 
   const handleLogout = () => {
     logout();
@@ -42,9 +46,15 @@ const Profile = () => {
         <span className="display-name">{user?.name}</span>
         <span className="username">{user?.email}</span>
       </div>
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
-      </button>
+      <div className="button-container">
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+
+        <button className="logout-btn" onClick={onResetClick}>
+          Reset
+        </button>
+      </div>
 
       <h3>All Categories</h3>
       <div className="categories">

@@ -4,9 +4,8 @@ import Keypad from "../components/Keypad";
 import { useGlobalContext } from "../context/Context";
 import { addTransaction } from "../database/transaction.db";
 import { Link, useNavigate } from "react-router-dom";
-import DatePicker from "../components/DatePicker";
 
-const AddTransaction = () => {
+const EditModel = () => {
     const navigate = useNavigate();
     const { categories, user, date, time, setTime } = useGlobalContext();
     const [showCalBtn, setShowCalBtn] = useState(true);
@@ -157,4 +156,4 @@ const AddTransaction = () => {
     );
 };
 
-export default AddTransaction;
+export default EditModel;
