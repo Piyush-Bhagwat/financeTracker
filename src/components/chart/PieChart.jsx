@@ -37,7 +37,7 @@ function PieChart() {
         } else {
             console.log("User ID is not available.");
         }
-    }, [user]);
+    }, [user, transactions, categories]);
 
     const calculateCategoryAmount = (categoryName, transactions) => {
         return transactions.reduce((total, transaction) => {
@@ -86,7 +86,6 @@ function PieChart() {
 
     return (
         <div className="containerr">
-            <h3>Category Distributions</h3>
             <Doughnut data={pieData} options={options} />
         </div>
     );

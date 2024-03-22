@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "../assets/style/addtransaction.css";
-import Keypad from "../components/Keypad";
+import Keypad from "./Keypad";
 import { useGlobalContext } from "../context/Context";
 import { addTransaction } from "../database/transaction.db";
 import { Link, useNavigate } from "react-router-dom";
-import DatePicker from "../components/DatePicker";
+import DatePicker from "./DatePicker";
 
-const AddTransaction = () => {
+const EditTransaction = () => {
   const navigate = useNavigate();
   const { categories, user, date, time, setTime } = useGlobalContext();
   const [showCalBtn, setShowCalBtn] = useState(true);
@@ -153,4 +153,4 @@ const AddTransaction = () => {
   );
 };
 
-export default AddTransaction;
+export default EditTransaction;

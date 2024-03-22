@@ -9,8 +9,10 @@
 }
 
 .home-header {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 22px;
+  /* background: linear-gradient(to right, #62fc09, white); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  */
 }
 
 .balance {
@@ -95,10 +97,29 @@
   font-weight: 500;
 }
 
-
 .see-all{
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.blurry-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.blurry-box::before {
+  content: '';
+  position: absolute;
+  background:#768FAE;
+  z-index: -1;
+}
+
+.blurry-box:hover::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: blur(0);
 }

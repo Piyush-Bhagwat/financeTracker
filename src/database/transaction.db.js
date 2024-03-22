@@ -34,12 +34,34 @@ const getTransactions = async (query) => {
     return transactions;
 };
 
-const getTransactionQuery = (uid, date, duration) => {
+const getTransactionQuery = (uid, date, duration, category, type, mode) => {
     const [startTimestamp, endTimestamp] = getStartAndEndDate(date, duration);
 
     const transactionsRef = collection(db, `users/${uid}/transactions`);
-    const q = query(
-        transactionsRef,
+
+    // Build an empty array to hold where clauses
+    let conditions = [];
+
+    // Add where clauses only if the value is not an empty string
+    if (type !== "") {
+        conditions.push(where("type", "==", type));
+    }
+    if (mode !== "") {
+        conditions.push(where("mode", "==", mode));
+    }
+    if (category !== "") {
+        conditions.push(where("category", "==", category));
+    }
+
+    // Combine conditions into a single query (if any exist)
+    let q =
+        conditions.length > 0
+            ? query(transactionsRef, ...conditions) // Spread operator for array elements
+            : query(transactionsRef); // Empty query if no conditions
+
+    // Add time filters and order by time
+    q = query(
+        q,
         where("time", ">=", startTimestamp),
         where("time", "<=", endTimestamp),
         orderBy("time", "desc")
@@ -74,8 +96,8 @@ function getStartAndEndDate(date, duration) {
     return [startDate?.getTime(), endDate?.getTime()];
 }
 
-const getAllExpenses = async (uid, date, duration) => {
-    const q = getTransactionQuery(uid, date, duration);
+const getAllExpenses = async (uid, date, duration, category, type, mode) => {
+    const q = getTransactionQuery(uid, date, duration, category, type, mode);
     const docSnapshot = (await getDocs(q)).docs;
 
     let expense = 0;
@@ -90,8 +112,8 @@ const getAllExpenses = async (uid, date, duration) => {
     return { total: expense, data };
 };
 
-const getAllIncome = async (uid, date, duration) => {
-    const q = getTransactionQuery(uid, date, duration);
+const getAllIncome = async (uid, date, duration, category, type, mode) => {
+    const q = getTransactionQuery(uid, date, duration, category, type, mode);
     const docSnapshot = (await getDocs(q)).docs;
     let income = 0;
     const data = [];

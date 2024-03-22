@@ -21,16 +21,16 @@ const Home = () => {
   return (
     <div className="home">
       <span className="home-header">Welcome, {user?.name}</span>
-      <div className="balance">
+      <div className="balance blurry-box">
         <span>Available Balance</span>
         <span>₹ {totalBalance}</span>
       </div>
       <div className="summary">
-        <div className="income">
+        <div className="income blurry-box">
           <span>Income</span>
           <span>₹ {totalIncome}</span>
         </div>
-        <div className="expenses">
+        <div className="expenses blurry-box">
           <span>Expenses</span>
           <span>₹ {totalExpenses}</span>
         </div>
