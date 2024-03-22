@@ -1,25 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../assets/style/transactioncard.css";
 import { useGlobalContext } from "../context/Context";
+import { FaPencilAlt } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
-import { useNavigate } from "react-router";
-import EditTransaction from "./EditTransaction";
+import { MdDeleteForever } from "react-icons/md";
+import { deleteTransaction } from "../database/transaction.db";
 
-const TransactionCard = ({ type, mode, category, amount, note, time }) => {
-  const { categories } = useGlobalContext();
-  const [showEdit, setShowEdit] = useState(false);
-  const navigate = useNavigate();
+const TransactionCard = ({ type, mode, category, amount, note, id, time }) => {
+  const { categories, uid } = useGlobalContext();
+  const [control, setControl] = useState(false);
+
+  const cardRef = useRef(null);
+
   let color, emoji, categoryName;
-
-  const handleEdit = () => {
-    setShowEdit(true);
-  };
-
-  const handleDelete = () => {
-    // Placeholder function for delete functionality
-    console.log("Delete button clicked");
-  };
 
   const readCategory = () => {
     const cat = categories?.find((cat) => cat.id === category);
@@ -40,45 +34,77 @@ const TransactionCard = ({ type, mode, category, amount, note, time }) => {
   getTime();
   readCategory();
 
-  return (
-    
-      <div className="transaction-card">
-        <div
-          className="icon"
-          style={{
-            backgroundColor: type === "income" ? "#2a8c2a" : color,
-          }}
-        >
-          {type === "income" ? "🤑" : emoji}
-        </div>
+  const handleClickOutside = (event) => {
+    if (cardRef.current && !cardRef.current.contains(event.target)) {
+      setControl(false);
+    }
+  };
 
-        <div className="details">
-          <div className="up">
-            <span className="cat">
-              {type === "income" ? "Income" : categoryName}
-            </span>
-            <div className="amount">
-              <span className="mode">{mode}</span>
-              <span
-                style={{
-                  color: type === "income" ? "#2a8c2a" : "#e94040",
-                }}
-              >
-                {`${type === "income" ? "+" : "-"}${amount}`}
-              </span>
-            </div>
-          </div>
-          <div className="down">
-            <span className="note">{note}</span>
-            <div className="btn-container">
-              <FaRegEdit onClick={handleEdit} />
-              <MdOutlineDelete onClick={handleDelete} />
-            </div>
-            <span className="time">{time}</span>
-          </div>
-        </div>
+  const handleDelete = async () => {
+    await deleteTransaction(uid, id);
+    window.location.reload();
+  };
+
+  const handleEdit = () => {
+    console.log("edit button clicked");
+  };
+
+  // Add event listener on component mount, remove on unmount
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  return (
+    <div
+      className={`transaction-card ${control ? "transaction-active" : " "}`}
+      onClick={() => setControl((p) => !p)}
+      ref={cardRef}
+    >
+      <div
+        className="icon"
+        style={{
+          backgroundColor: type === "income" ? "#2a8c2a" : color,
+        }}
+      >
+        {type === "income" ? "🤑" : emoji}
       </div>
 
+      <div className="details">
+        <div className="up">
+          <span className="cat">
+            {type === "income" ? "Income" : categoryName}
+          </span>
+          <div className="amount">
+            <span className="mode">{mode}</span>
+            <span
+              style={{
+                color: type === "income" ? "#2a8c2a" : "#e94040",
+              }}
+            >
+              {`${type === "income" ? "+" : "-"}${amount}`}
+            </span>
+          </div>
+        </div>
+        {!control && (
+          <div className="down">
+            <span className="note">{note}</span>
+            <span className="time">{time}</span>
+          </div>
+        )}
+        {control && (
+          <div className="transaction-control">
+            <button onClick={handleDelete}>
+              <MdDeleteForever /> Delete
+            </button>
+            <button>
+              <FaPencilAlt /> Edit
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

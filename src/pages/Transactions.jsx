@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import "../assets/style/transactions.css";
 import { useGlobalContext } from "../context/Context";
-
 import FiltersMenu from "../components/FiltersMenu";
 import { LuFilter } from "react-icons/lu";
 
@@ -46,6 +45,7 @@ const Transactions = () => {
                             <TransactionCard
                                 amount={trans.amount}
                                 key={trans.id}
+                                id ={trans.id}
                                 category={trans.category}
                                 type={trans.type}
                                 note={trans.note}
@@ -71,6 +71,8 @@ const Transactions = () => {
 
             {isMenuOpen ? <FiltersMenu setIsMenuOpen={setIsMenuOpen} /> : null}
             {renderCards()}
+
+          
         </div>
     );
 };

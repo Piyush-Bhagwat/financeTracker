@@ -8,7 +8,7 @@ const defaultData = {
         {
             name: "Cloths",
             color: "#BC4383",
-            emoji: "🍽️",
+            emoji: "👕",
         },
         {
             name: "Travel",
